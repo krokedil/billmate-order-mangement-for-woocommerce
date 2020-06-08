@@ -70,7 +70,9 @@ class Test_BOM_Refund_Data_Payment_Data_Helper extends AKrokedil_Unit_Test_Case 
 	 */
 	public function delete() {
 		wp_delete_post( $this->order->get_id() );
-		$this->order = null;
+		wp_delete_post( $this->refund_order->get_id() );
+		$this->order        = null;
+		$this->refund_order = null;
 	}
 
 	/**

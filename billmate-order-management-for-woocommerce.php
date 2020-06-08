@@ -119,6 +119,10 @@ if ( ! class_exists( 'Billmate_Order_Management_For_WooCommerce' ) ) {
 			// Requests.
 			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/requests/order-management/post/class-bom-request-activate-payment.php';
 			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/requests/order-management/post/class-bom-request-cancel-payment.php';
+
+			// Request Helpers.
+			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/requests/helpers/class-bom-refund-data-articles-helper.php';
+
 		}
 
 		/**

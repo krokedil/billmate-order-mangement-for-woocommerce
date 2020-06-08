@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Activate payment request class
  */
-class BOM_Request_Activate_Payment extends BCO_Request {
+class BOM_Request_Activate_Payment extends BOM_Request {
 
 	/**
 	 * Makes the request.

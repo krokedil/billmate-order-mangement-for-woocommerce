@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Cancel payment request class
  */
-class BOM_Request_Cancel_Payment extends BCO_Request {
+class BOM_Request_Cancel_Payment extends BOM_Request {
 
 	/**
 	 * Makes the request.

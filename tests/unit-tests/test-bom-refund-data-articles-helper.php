@@ -411,7 +411,7 @@ class Test_BOM_Refund_Data_Articles_Helper extends AKrokedil_Unit_Test_Case {
 	 * Create refund order.
 	 *
 	 * @param WC_Order $order The WooCommerce order.
-	 * @return WC_Order_Refund $refund_order The WooCommerce refund order.
+	 * @return void
 	 */
 	public function create_refund_order( $order ) {
 		$products     = $order->get_items( 'line_item' );

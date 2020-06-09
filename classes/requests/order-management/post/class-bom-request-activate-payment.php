@@ -22,14 +22,14 @@ class BOM_Request_Activate_Payment extends BOM_Request {
 	 */
 	public function request( $bco_transaction_id ) {
 		$request_url  = $this->base_url;
-		$request_args = apply_filters( 'bco_activate_payment_args', $this->get_request_args( $bco_transaction_id ) );
+		$request_args = apply_filters( 'bom_activate_payment_args', $this->get_request_args( $bco_transaction_id ) );
 
 		$response = wp_remote_request( $request_url, $request_args );
 		$code     = wp_remote_retrieve_response_code( $response );
 
 		// Log the request.
-		$log = BCO_Logger::format_log( $bco_transaction_id, 'GET', 'BCO activate payment', $request_args, json_decode( wp_remote_retrieve_body( $response ), true ), $code );
-		BCO_Logger::log( $log );
+		$log = BOM_Logger::format_log( $bco_transaction_id, 'GET', 'BOM activate payment', $request_args, json_decode( wp_remote_retrieve_body( $response ), true ), $code );
+		BOM_Logger::log( $log );
 
 		$formated_response = $this->process_response( $response, $request_args, $request_url );
 		return $formated_response;

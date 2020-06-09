@@ -26,7 +26,7 @@ class BOM_API {
 		$request  = new BOM_Request_Activate_Payment();
 		$response = $request->request( $bco_transaction_id );
 
-		return $this->check_for_api_error( $response );
+		return $response;
 	}
 
 	/**
@@ -39,20 +39,6 @@ class BOM_API {
 		$request  = new BOM_Request_Cancel_Payment();
 		$response = $request->request( $bco_transaction_id );
 
-		return $this->check_for_api_error( $response );
-	}
-
-	/**
-	 * Checks for WP Errors and returns either the response as array or a false.
-	 *
-	 * @param array $response The response from the request.
-	 * @return mixed
-	 */
-	private function check_for_api_error( $response ) {
-		if ( is_wp_error( $response ) ) {
-			bco_extract_error_message( $response );
-			return false;
-		}
 		return $response;
 	}
 }

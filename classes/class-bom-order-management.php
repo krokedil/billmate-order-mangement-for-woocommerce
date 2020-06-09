@@ -44,9 +44,9 @@ class BOM_Order_Management {
 		$subscription = $this->check_if_subscription( $order );
 
 		// Check if we have a order number.
-		$order_number = get_post_meta( $order_id, '_billmate_transaction_id', true );
-		if ( empty( $purchase_id ) ) {
-			$order->add_order_note( __( 'Billmate Order_Management reservation could not be cancelled. Missing Billmate order number.', 'billmate-order-managment-for-woocommerce' ) );
+		$bco_transaction_id = get_post_meta( $order_id, '_billmate_transaction_id', true );
+		if ( empty( $bco_transaction_id ) ) {
+			$order->add_order_note( __( 'Billmate Checkout reservation could not be cancelled. Missing Billmate transaction id.', 'billmate-order-managment-for-woocommerce' ) );
 			$order->set_status( 'on-hold' );
 			return;
 		}
@@ -58,7 +58,7 @@ class BOM_Order_Management {
 		}
 
 		// Cancel order.
-		$billmate_order = BOM_WC()->api->request_cancel_payment( $order_number );
+		$billmate_order = BOM_WC()->api->request_cancel_payment( $bco_transaction_id );
 
 		// Check if we were successful.
 		if ( is_wp_error( $billmate_order ) ) {
@@ -102,10 +102,10 @@ class BOM_Order_Management {
 			return;
 		}
 
-		// Check if we have a order number.
-		$order_number = get_post_meta( $order_id, '_billmate_transaction_id', true );
-		if ( empty( $order_number ) ) {
-			$order->add_order_note( __( 'Billmate Checkout reservation could not be activated. Missing Billmate order number.', 'billmate-order-managment-for-woocommerce' ) );
+		// Check if we have a transaction id.
+		$bco_transaction_id = get_post_meta( $order_id, '_billmate_transaction_id', true );
+		if ( empty( $bco_transaction_id ) ) {
+			$order->add_order_note( __( 'Billmate Checkout reservation could not be activated. Missing Billmate transaction id.', 'billmate-order-managment-for-woocommerce' ) );
 			$order->set_status( 'on-hold' );
 			return;
 		}
@@ -118,10 +118,10 @@ class BOM_Order_Management {
 		}
 
 		// Activate order.
-		$billmate_order = BOM_WC()->api->request_activate_payment( $order_number );
-		error_log( 'billmate BOM ordER ' . var_export( $billmate_order, true ) );
+		$billmate_order = BOM_WC()->api->request_activate_payment( $bco_transaction_id );
+
 		// Check if we were successful.
-		if ( is_wp_error( $billmate_order ) ) { // handle error.
+		if ( is_wp_error( $billmate_order ) ) {
 			// If error save error message.
 			$code          = $billmate_order->get_error_code();
 			$message       = $billmate_order->get_error_message();

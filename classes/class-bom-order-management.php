@@ -44,7 +44,7 @@ class BOM_Order_Management {
 		$subscription = $this->check_if_subscription( $order );
 
 		// Check if we have a order number.
-		$order_number = get_post_meta( $order_id, '_billmate_order_number', true );
+		$order_number = get_post_meta( $order_id, '_billmate_transaction_id', true );
 		if ( empty( $purchase_id ) ) {
 			$order->add_order_note( __( 'Billmate Order_Management reservation could not be cancelled. Missing Billmate order number.', 'billmate-order-managment-for-woocommerce' ) );
 			$order->set_status( 'on-hold' );
@@ -103,7 +103,7 @@ class BOM_Order_Management {
 		}
 
 		// Check if we have a order number.
-		$order_number = get_post_meta( $order_id, '_billmate_order_number', true );
+		$order_number = get_post_meta( $order_id, '_billmate_transaction_id', true );
 		if ( empty( $order_number ) ) {
 			$order->add_order_note( __( 'Billmate Checkout reservation could not be activated. Missing Billmate order number.', 'billmate-order-managment-for-woocommerce' ) );
 			$order->set_status( 'on-hold' );

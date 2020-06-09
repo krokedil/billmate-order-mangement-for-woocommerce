@@ -19,12 +19,12 @@ class BOM_API {
 	/**
 	 * Activate Billmate Payment.
 	 *
-	 * @param string $bco_order_number The Billmate order number.
+	 * @param string $bco_transaction_id The Billmate transaction id.
 	 * @return mixed
 	 */
-	public function request_activate_payment( $bco_order_number = '' ) {
+	public function request_activate_payment( $bco_transaction_id = '' ) {
 		$request  = new BOM_Request_Activate_Payment();
-		$response = $request->request( $bco_order_number );
+		$response = $request->request( $bco_transaction_id );
 
 		return $this->check_for_api_error( $response );
 	}
@@ -32,12 +32,12 @@ class BOM_API {
 	/**
 	 * Cancel Billmate Payment.
 	 *
-	 * @param string $bco_order_number The Billmate order number.
+	 * @param string $bco_transaction_id The Billmate transaction id.
 	 * @return mixed
 	 */
-	public function request_cancel_payment( $bco_order_number = '' ) {
+	public function request_cancel_payment( $bco_transaction_id = '' ) {
 		$request  = new BOM_Request_Cancel_Payment();
-		$response = $request->request( $bco_order_number );
+		$response = $request->request( $bco_transaction_id );
 
 		return $this->check_for_api_error( $response );
 	}

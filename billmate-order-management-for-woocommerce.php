@@ -123,6 +123,7 @@ if ( ! class_exists( 'Billmate_Order_Management_For_WooCommerce' ) ) {
 			// Request Helpers.
 			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/requests/helpers/class-bom-refund-data-articles-helper.php';
 			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/requests/helpers/class-bom-refund-data-payment-data-helper.php';
+			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/requests/helpers/class-bom-refund-data-cart-helper.php';
 
 		}
 

@@ -28,7 +28,7 @@ class BOM_Request_Activate_Payment extends BOM_Request {
 		$code     = wp_remote_retrieve_response_code( $response );
 
 		// Log the request.
-		$log = BOM_Logger::format_log( $bco_transaction_id, 'GET', 'BOM activate payment', $request_args, json_decode( wp_remote_retrieve_body( $response ), true ), $code );
+		$log = BOM_Logger::format_log( $bco_transaction_id, 'POST', 'BOM activate payment', $request_args, json_decode( wp_remote_retrieve_body( $response ), true ), $code );
 		BOM_Logger::log( $log );
 
 		$formated_response = $this->process_response( $response, $request_args, $request_url );

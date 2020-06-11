@@ -19,6 +19,9 @@ class BOM_Order_Management {
 	public function __construct() {
 		add_action( 'woocommerce_order_status_cancelled', array( $this, 'cancel_reservation' ) );
 		add_action( 'woocommerce_order_status_completed', array( $this, 'activate_reservation' ) );
+
+		// Refund an order.
+		add_filter( 'wc_billmate_checkout_process_refund', array( $this, 'refund_billmate_order' ), 10, 4 );
 	}
 
 	/**
@@ -140,73 +143,67 @@ class BOM_Order_Management {
 	/**
 	 * WooCommerce Refund.
 	 *
+	 * @param bool   $result Refund attempt result.
 	 * @param string $order_id The WooCommerce order ID.
 	 * @param float  $amount The amount to be refunded.
 	 * @param string $reason The reason given for the refund.
 	 * @return boolean
 	 */
-	public function refund_payment( $order_id, $amount = null, $reason = '' ) {
+	public function refund_billmate_order( $result, $order_id, $amount = null, $reason = '' ) {
 		$order = wc_get_order( $order_id );
 		// If this order wasn't created using aco payment method, bail.
-		if ( 'aco' !== $order->get_payment_method() ) {
-			return;
+		if ( 'bco' !== $order->get_payment_method() ) {
+			return false;
 		}
 
-		// Check Avarda settings to see if we have the ordermanagement enabled.
-		$avarda_settings  = get_option( 'woocommerce_aco_settings' );
-		$order_management = 'yes' === $avarda_settings['order_management'] ? true : false;
+		// Check Billmate settings to see if we have the ordermanagement enabled.
+		$billmate_settings = get_option( 'woocommerce_bco_settings' );
+		$order_management  = 'yes' === $billmate_settings['order_management'] ? true : false;
 		if ( ! $order_management ) {
-			return;
+			return false;
 		}
 
-		// Check if we have a purchase id.
-		$purchase_id = get_post_meta( $order_id, '_wc_avarda_purchase_id', true );
-		if ( empty( $purchase_id ) ) {
-			$order->add_order_note( __( 'Avarda Checkout order could not be refunded. Missing Avarda purchase id.', 'avarda-checkout-for-woocommerce' ) );
+		// Check if we have a transaction id.
+		$bco_transaction_id = get_post_meta( $order_id, '_billmate_transaction_id', true );
+		if ( empty( $bco_transaction_id ) ) {
+			$order->add_order_note( __( 'Billmate Checkout order could not be refunded. Missing Billmate transaction id.', 'billmate-checkout-for-woocommerce' ) );
 			$order->set_status( 'on-hold' );
-			return;
+			return false;
 		}
 
 		$subscription = $this->check_if_subscription( $order );
 
-		// Get the Avarda order.
-		// TODO: Should we do different request if order is subcription?
-		$avarda_order_tmp = ( $subscription ) ? ACO_WC()->api->request_get_payment( $purchase_id, true ) : ACO_WC()->api->request_get_payment( $purchase_id, true );
-		if ( is_wp_error( $avarda_order_tmp ) ) {
+		// Get the Billmate order.
+		$billmate_order_tmp = BOM_WC()->api->request_get_payment( $bco_transaction_id );
+		if ( is_wp_error( $billmate_order_tmp ) ) {
 			// If error save error message.
-			$code          = $avarda_order_tmp->get_error_code();
-			$message       = $avarda_order_tmp->get_error_message();
-			$text          = __( 'Avarda API Error on get avarda order before refund: ', 'avarda-checkout-for-woocommerce' ) . '%s %s';
+			$code          = $billmate_order_tmp->get_error_code();
+			$message       = $billmate_order_tmp->get_error_message();
+			$text          = __( 'Billmate API Error on get billmate order before refund: ', 'billmate-checkout-for-woocommerce' ) . '%s %s';
 			$formated_text = sprintf( $text, $code, $message );
 			$order->add_order_note( $formated_text );
 			return false;
 		}
 
-		// Check if B2C or B2B.
-		$aco_state = '';
-		if ( 'B2C' === $avarda_order_tmp['mode'] ) {
-			$aco_state = $avarda_order_tmp['b2C']['step']['current'];
-		} elseif ( 'B2B' === $avarda_order_tmp['mode'] ) {
-			$aco_state = $avarda_order_tmp['b2B']['step']['current'];
-		}
+		$bco_status = strtolower( $billmate_order_tmp['data']['PaymentData']['status'] );
 
-		if ( 'Completed' === $aco_state ) {
-			$refund_order_id = ACO_Helper_Create_Refund_Data::get_refunded_order( $order_id );
-			$refunded_items  = ACO_Helper_Create_Refund_Data::create_refund_data( $order_id, $refund_order_id, $amount, $reason );
-			$avarda_order    = ACO_WC()->api->request_return_order( $order_id, $refunded_items );
-			if ( is_wp_error( $avarda_order ) ) {
+		if ( 'paid' === $bco_status || 'created' === $bco_status ) {
+			$refund_order_id = BOM_Refund_Data_Helper::get_refunded_order( $order_id );
+			$refund_data     = BOM_Refund_Data_Helper::create_refund_data( $order_id, $refund_order_id, $amount, $reason );
+			$billmate_order  = BOM_WC()->api->request_credit_payment( $bco_transaction_id, $refund_data );
+			if ( is_wp_error( $billmate_order ) ) {
 				// If error save error message and return false.
-				$code          = $avarda_order->get_error_code();
-				$message       = $avarda_order->get_error_message();
-				$text          = __( 'Avarda API Error on Avarda refund: ', 'avarda-checkout-for-woocommerce' ) . '%s %s';
+				$code          = $billmate_order->get_error_code();
+				$message       = $billmate_order->get_error_message();
+				$text          = __( 'Billmate API Error on Billmate refund: ', 'billmate-checkout-for-woocommerce' ) . '%s %s';
 				$formated_text = sprintf( $text, $code, $message );
 				$order->add_order_note( $formated_text );
 				return false;
 			}
-			$order->add_order_note( __( 'Avarda Checkout order was successfully refunded.', 'avarda-checkout-for-woocommerce' ) );
+			$order->add_order_note( __( 'Billmate Checkout order was successfully refunded.', 'billmate-checkout-for-woocommerce' ) );
 			return true;
 		}
-		$order->add_order_note( __( 'Avarda Checkout order could not be refunded.', 'avarda-checkout-for-woocommerce' ) );
+		$order->add_order_note( __( 'Billmate Checkout order could not be refunded.', 'billmate-checkout-for-woocommerce' ) );
 		return false;
 
 	}

@@ -86,7 +86,7 @@ class BOM_Refund_Data_Articles_Helper {
 		$tax_rates          = WC_Tax::get_rates( $refund_order_item->get_tax_class() );
 		$tax_rate           = reset( $tax_rates );
 		$formatted_tax_rate = $tax_rate['rate'];
-		return strval( round( $formatted_tax_rate ) );
+		return round( $formatted_tax_rate );
 	}
 
 }

@@ -85,7 +85,7 @@ class BOM_Request_Credit_Payment extends BOM_Request {
 				'number'     => $bco_transaction_id,
 				'partcredit' => $refund_data['part_credit'],
 			),
-			'Articles'    => ( 'true' === $refund_data['part_credit'] ) ? $refund_data['articles_data'] : '', // Only need articles if refund is partial.
+			'Articles'    => ( 'true' === $refund_data['part_credit'] ) ? array( $refund_data['articles_data'] ) : '', // Only need articles if refund is partial.
 			'Cart'        => array(
 				'Handling' => $refund_data['handling_data'],
 				'Shipping' => $refund_data['shipping_data'],

@@ -44,14 +44,14 @@ class BOM_Refund_Data_Helper {
 			// Item refund.
 			if ( $refunded_items ) {
 				foreach ( $refunded_items as $item ) {
-					$refund_data['articles_data'] = self::get_refund_articles_data( $item );
+					$refund_data['articles_data'][] = self::get_refund_articles_data( $item );
 				}
 			}
 
 			// Fee item refund.
 			if ( $refunded_fees ) {
 				foreach ( $refunded_fees as $fee ) {
-					$refund_data['articles_data'] = self::get_refund_articles_data( $fee );
+					$refund_data['articles_data'][] = self::get_refund_articles_data( $fee );
 				}
 			}
 

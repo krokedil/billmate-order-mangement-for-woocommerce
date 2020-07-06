@@ -120,7 +120,15 @@ class Test_BOM_Refund_Data_Articles_Helper extends AKrokedil_Unit_Test_Case {
 		$this->create_order( '25' );
 		$this->create_refund_order( $this->order );
 		foreach ( $this->refund_order->get_items() as $item ) {
-			$this->assertEquals( 5000, ( new BOM_Refund_Data_Articles_Helper() )->get_article_price( $item ) );
+			foreach ( $this->order->get_items() as $original_order_item ) {
+				$refund_item_product_id   = (int) $item->get_product_id();
+				$original_item_product_id = (int) $original_order_item->get_product_id();
+				if ( $refund_item_product_id === $original_item_product_id ) {
+					// Found product match, continue.
+					break;
+				}
+			}
+			$this->assertEquals( 8000, ( new BOM_Refund_Data_Articles_Helper() )->get_article_price( $original_order_item ) );
 		}
 		wp_delete_post( $this->order->get_id() );
 		wp_delete_post( $this->refund_order->get_id() );
@@ -130,7 +138,15 @@ class Test_BOM_Refund_Data_Articles_Helper extends AKrokedil_Unit_Test_Case {
 		$this->create_order( '12' );
 		$this->create_refund_order( $this->order );
 		foreach ( $this->refund_order->get_items() as $item ) {
-			$this->assertEquals( 5000, ( new BOM_Refund_Data_Articles_Helper() )->get_article_price( $item ) );
+			foreach ( $this->order->get_items() as $original_order_item ) {
+				$refund_item_product_id   = (int) $item->get_product_id();
+				$original_item_product_id = (int) $original_order_item->get_product_id();
+				if ( $refund_item_product_id === $original_item_product_id ) {
+					// Found product match, continue.
+					break;
+				}
+			}
+			$this->assertEquals( 8929, ( new BOM_Refund_Data_Articles_Helper() )->get_article_price( $original_order_item ) );
 		}
 		wp_delete_post( $this->order->get_id() );
 		wp_delete_post( $this->refund_order->get_id() );
@@ -140,7 +156,15 @@ class Test_BOM_Refund_Data_Articles_Helper extends AKrokedil_Unit_Test_Case {
 		$this->create_order( '6' );
 		$this->create_refund_order( $this->order );
 		foreach ( $this->refund_order->get_items() as $item ) {
-			$this->assertEquals( 5000, ( new BOM_Refund_Data_Articles_Helper() )->get_article_price( $item ) );
+			foreach ( $this->order->get_items() as $original_order_item ) {
+				$refund_item_product_id   = (int) $item->get_product_id();
+				$original_item_product_id = (int) $original_order_item->get_product_id();
+				if ( $refund_item_product_id === $original_item_product_id ) {
+					// Found product match, continue.
+					break;
+				}
+			}
+			$this->assertEquals( 9434, ( new BOM_Refund_Data_Articles_Helper() )->get_article_price( $original_order_item ) );
 		}
 		wp_delete_post( $this->order->get_id() );
 		wp_delete_post( $this->refund_order->get_id() );
@@ -150,7 +174,15 @@ class Test_BOM_Refund_Data_Articles_Helper extends AKrokedil_Unit_Test_Case {
 		$this->create_order( '25', false );
 		$this->create_refund_order( $this->order );
 		foreach ( $this->refund_order->get_items() as $item ) {
-			$this->assertEquals( 5000, ( new BOM_Refund_Data_Articles_Helper() )->get_article_price( $item ) );
+			foreach ( $this->order->get_items() as $original_order_item ) {
+				$refund_item_product_id   = (int) $item->get_product_id();
+				$original_item_product_id = (int) $original_order_item->get_product_id();
+				if ( $refund_item_product_id === $original_item_product_id ) {
+					// Found product match, continue.
+					break;
+				}
+			}
+			$this->assertEquals( 10000, ( new BOM_Refund_Data_Articles_Helper() )->get_article_price( $original_order_item ) );
 		}
 		wp_delete_post( $this->order->get_id() );
 		wp_delete_post( $this->refund_order->get_id() );
@@ -160,7 +192,15 @@ class Test_BOM_Refund_Data_Articles_Helper extends AKrokedil_Unit_Test_Case {
 		$this->create_order( '12', false );
 		$this->create_refund_order( $this->order );
 		foreach ( $this->refund_order->get_items() as $item ) {
-			$this->assertEquals( 5000, ( new BOM_Refund_Data_Articles_Helper() )->get_article_price( $item ) );
+			foreach ( $this->order->get_items() as $original_order_item ) {
+				$refund_item_product_id   = (int) $item->get_product_id();
+				$original_item_product_id = (int) $original_order_item->get_product_id();
+				if ( $refund_item_product_id === $original_item_product_id ) {
+					// Found product match, continue.
+					break;
+				}
+			}
+			$this->assertEquals( 10000, ( new BOM_Refund_Data_Articles_Helper() )->get_article_price( $original_order_item ) );
 		}
 		wp_delete_post( $this->order->get_id() );
 		wp_delete_post( $this->refund_order->get_id() );
@@ -170,7 +210,15 @@ class Test_BOM_Refund_Data_Articles_Helper extends AKrokedil_Unit_Test_Case {
 		$this->create_order( '6', false );
 		$this->create_refund_order( $this->order );
 		foreach ( $this->refund_order->get_items() as $item ) {
-			$this->assertEquals( 5000, ( new BOM_Refund_Data_Articles_Helper() )->get_article_price( $item ) );
+			foreach ( $this->order->get_items() as $original_order_item ) {
+				$refund_item_product_id   = (int) $item->get_product_id();
+				$original_item_product_id = (int) $original_order_item->get_product_id();
+				if ( $refund_item_product_id === $original_item_product_id ) {
+					// Found product match, continue.
+					break;
+				}
+			}
+			$this->assertEquals( 10000, ( new BOM_Refund_Data_Articles_Helper() )->get_article_price( $original_order_item ) );
 		}
 		wp_delete_post( $this->order->get_id() );
 		wp_delete_post( $this->refund_order->get_id() );

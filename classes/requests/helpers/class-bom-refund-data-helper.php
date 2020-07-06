@@ -44,21 +44,37 @@ class BOM_Refund_Data_Helper {
 			// Item refund.
 			if ( $refunded_items ) {
 				foreach ( $refunded_items as $item ) {
-					$refund_data['articles_data'][] = self::get_refund_articles_data( $item );
+					foreach ( $order->get_items() as $original_order_item ) {
+						$refund_item_product_id   = (int) $item->get_product_id();
+						$original_item_product_id = (int) $original_order_item->get_product_id();
+						if ( $refund_item_product_id === $original_item_product_id ) {
+							// Found product match, continue.
+							break;
+						}
+					}
+					$refund_data['articles_data'][] = self::get_refund_articles_data( $item, $original_order_item );
 				}
 			}
 
-			// Fee item refund.
+			// Fee refund.
 			if ( $refunded_fees ) {
 				foreach ( $refunded_fees as $fee ) {
-					$refund_data['articles_data'][] = self::get_refund_articles_data( $fee );
+					foreach ( $order->get_items( 'fee' ) as $original_order_fee ) {
+						$refund_fee_product_id   = (int) $fee->get_product_id();
+						$original_fee_product_id = (int) $original_order_fee->get_product_id();
+						if ( $refund_fee_product_id === $original_fee_product_id ) {
+							// Found product match, continue.
+							break;
+						}
+					}
+					$refund_data['articles_data'][] = self::get_refund_articles_data( $fee, $original_order_item );
 				}
 			}
 
 			// Handling.
 			$refund_data['handling_data'] = self::get_refund_handling_data( $refund_order );
 
-			// Shipping item refund.
+			// Shipping refund.
 			$refund_data['shipping_data'] = self::get_refund_shipping_data( $refund_order );
 
 			// Total.
@@ -110,14 +126,15 @@ class BOM_Refund_Data_Helper {
 	 * Get refund articles.
 	 *
 	 * @param WC_Order_Item $order_item WooCommerce Order Item.
+	 * @param WC_Order_Item $original_order_item original order item.
 	 * @return array
 	 */
-	private static function get_refund_articles_data( $order_item ) {
+	private static function get_refund_articles_data( $order_item, $original_order_item ) {
 		return array(
 			'artnr'      => BOM_Refund_Data_Articles_Helper::get_article_number( $order_item ),
 			'title'      => BOM_Refund_Data_Articles_Helper::get_title( $order_item ),
 			'quantity'   => BOM_Refund_Data_Articles_Helper::get_quantity( $order_item ),
-			'aprice'     => BOM_Refund_Data_Articles_Helper::get_article_price( $order_item ),
+			'aprice'     => BOM_Refund_Data_Articles_Helper::get_article_price( $original_order_item ),
 			'withouttax' => BOM_Refund_Data_Articles_Helper::get_without_tax( $order_item ),
 			'taxrate'    => BOM_Refund_Data_Articles_Helper::get_tax_rate( $order_item ),
 		);

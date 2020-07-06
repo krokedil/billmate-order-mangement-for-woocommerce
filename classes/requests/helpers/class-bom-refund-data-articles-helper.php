@@ -58,11 +58,11 @@ class BOM_Refund_Data_Articles_Helper {
 	/**
 	 * Get refund order item article price excluding tax
 	 *
-	 * @param array $refund_order_item order item.
+	 * @param WC_Order_Item $original_order_item original order item.
 	 * @return int $item_price Item price.
 	 */
-	public static function get_article_price( $refund_order_item ) {
-		$item_subtotal = abs( $refund_order_item->get_total() ) * 100 / abs( $refund_order_item->get_quantity() );
+	public static function get_article_price( $original_order_item ) {
+		$item_subtotal = $original_order_item->get_subtotal() * 100;
 		return round( $item_subtotal );
 	}
 

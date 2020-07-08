@@ -6,6 +6,6 @@
  * @since 1.0.0
  */
 return array(
-	'name'    => 'woocommerce-billmate-order-management.php',
+	'name'    => 'billmate-order-management-for-woocommerce.php',
 	'version' => '1.0.0',
 );

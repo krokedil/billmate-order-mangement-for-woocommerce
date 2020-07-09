@@ -1,5 +1,7 @@
 # woocommerce_billmate_order_management
 
+Billmate Order Management for WooCommerce
+
 # Documentation
 
 Installation instructions.

@@ -51,6 +51,7 @@ if ( ! class_exists( 'Billmate_Order_Management_For_WooCommerce' ) ) {
 		public function __construct() {
 			// Initiate the plugin.
 			add_action( 'plugins_loaded', array( $this, 'init' ) );
+			add_filter( 'wc_bco_payments_supports', array( $this, 'add_gateway_support' ) );
 		}
 
 		/**
@@ -153,6 +154,18 @@ if ( ! class_exists( 'Billmate_Order_Management_For_WooCommerce' ) ) {
 			);
 			$settings     = array_merge( $settings, $bom_settings );
 			return $settings;
+		}
+
+		/**
+		 * Add refunds support to Billmate Payments gateway.
+		 *
+		 * @param array $features Supported features.
+		 *
+		 * @return array $features Supported features.
+		 */
+		public function add_gateway_support( $features ) {
+			$features[] = 'refunds';
+			return $features;
 		}
 
 		/**

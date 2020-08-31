@@ -121,6 +121,7 @@ if ( ! class_exists( 'Billmate_Order_Management_For_WooCommerce' ) ) {
 			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/requests/order-management/post/class-bom-request-activate-payment.php';
 			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/requests/order-management/post/class-bom-request-cancel-payment.php';
 			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/requests/order-management/post/class-bom-request-credit-payment.php';
+			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/requests/order-management/post/class-bom-request-update-payment.php';
 			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/requests/order-management/get/class-bom-request-get-payment.php';
 
 			// Request Helpers.

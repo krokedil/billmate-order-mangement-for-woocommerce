@@ -22,6 +22,9 @@ class BOM_Order_Management {
 
 		// Refund an order.
 		add_filter( 'wc_billmate_checkout_process_refund', array( $this, 'refund_billmate_order' ), 10, 4 );
+
+		// Update an order.
+		add_action( 'woocommerce_saved_order_items', array( $this, 'update_bco_order_items' ), 10, 2 );
 	}
 
 	/**
@@ -222,5 +225,57 @@ class BOM_Order_Management {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Updates Billmate order items.
+	 *
+	 * @param int $order_id Order ID.
+	 */
+	public function update_bco_order_items( $order_id ) {
+		if ( ! is_ajax() ) {
+			return;
+		}
+
+		$order = wc_get_order( $order_id );
+
+		// Check if the order has been paid.
+		if ( null === $order->get_date_paid() ) {
+			return;
+		}
+
+		// Not going to do this for non-BCO.
+		if ( 'bco' !== $order->get_payment_method() ) {
+			return;
+		}
+
+		// Changes only possible if order is set to On Hold.
+		if ( 'on-hold' !== $order->get_status() ) {
+			return;
+		}
+
+		// Retrieve transaction id from order post meta.
+		$bco_transaction_id = get_post_meta( $order_id, '_billmate_transaction_id', true );
+		// Retrieve Billmate order.
+		$billmate_order = BCO_WC()->api->request_get_payment( $bco_transaction_id );
+
+		if ( is_wp_error( $billmate_order ) ) {
+			$order->add_order_note( 'Billmate order could not be updated due to an error.' );
+
+			return;
+		}
+		$not_allowed_statuses = array( 'Paid', 'Pending', 'Factoring', 'PartPayment', 'Handling' );
+		if ( ! in_array( $billmate_order['data']['PaymentData']['status'], $not_allowed_statuses, true ) ) {
+			$response = BOM_WC()->api->request_update_payment( $order_id );
+			if ( ! is_wp_error( $response ) ) {
+				$order->add_order_note( 'Billmate order updated.' );
+			} else {
+				$order_note = 'Could not update Billmate order lines.';
+				if ( '' !== $response->get_error_message() ) {
+					$order_note .= ' ' . $response->get_error_message() . '.';
+				}
+				$order->add_order_note( $order_note );
+			}
+		}
 	}
 }

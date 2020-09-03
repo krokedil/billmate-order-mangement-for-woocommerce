@@ -68,6 +68,7 @@ class BOM_Request_Activate_Payment extends BOM_Request {
 			'headers' => $this->get_headers(),
 			'method'  => 'POST',
 			'body'    => wp_json_encode( $this->get_body( $bco_transaction_id ) ),
+			'timeout' => apply_filters( 'bco_set_timeout', 10 ),
 		);
 	}
 

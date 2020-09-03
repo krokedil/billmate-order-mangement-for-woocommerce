@@ -71,6 +71,7 @@ class BOM_Request_Credit_Payment extends BOM_Request {
 			'headers' => $this->get_headers(),
 			'method'  => 'POST',
 			'body'    => wp_json_encode( $this->get_body( $bco_transaction_id, $refund_data ) ),
+			'timeout' => apply_filters( 'bco_set_timeout', 10 ),
 		);
 	}
 

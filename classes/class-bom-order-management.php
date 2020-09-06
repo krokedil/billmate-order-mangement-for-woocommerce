@@ -40,6 +40,11 @@ class BOM_Order_Management {
 			return;
 		}
 
+		// If the order has not been paid for, bail.
+		if ( empty( $order->get_date_paid() ) ) {
+			return;
+		}
+
 		// Check Billmate settings to see if we have the ordermanagement enabled.
 		$billmate_settings = get_option( 'woocommerce_bco_settings' );
 		$order_management  = 'yes' === $billmate_settings['order_management'] ? true : false;
@@ -92,6 +97,11 @@ class BOM_Order_Management {
 		$order = wc_get_order( $order_id );
 		// If this order wasn't created using aco payment method, bail.
 		if ( 'bco' !== $order->get_payment_method() ) {
+			return;
+		}
+
+		// Check if the order has been paid.
+		if ( empty( $order->get_date_paid() ) ) {
 			return;
 		}
 

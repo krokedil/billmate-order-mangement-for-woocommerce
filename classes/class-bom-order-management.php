@@ -169,13 +169,6 @@ class BOM_Order_Management {
 			return false;
 		}
 
-		// Check Billmate settings to see if we have the ordermanagement enabled.
-		$billmate_settings = get_option( 'woocommerce_bco_settings' );
-		$order_management  = 'yes' === $billmate_settings['order_management'] ? true : false;
-		if ( ! $order_management ) {
-			return false;
-		}
-
 		// Check if we have a transaction id.
 		$bco_transaction_id = get_post_meta( $order_id, '_billmate_transaction_id', true );
 		if ( empty( $bco_transaction_id ) ) {

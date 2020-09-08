@@ -140,13 +140,29 @@ if ( ! class_exists( 'Billmate_Order_Management_For_WooCommerce' ) ) {
 		 */
 		public function bom_add_settings( $settings ) {
 			$bom_settings = array(
-				'order_management' => array(
-					'title'   => __( 'Enable Order Management', 'billmate-order-management-for-woocommerce' ),
+				'order_management_title' => array(
+					'title' => __( 'Order management', 'billmate-order-management-for-woocommerce' ),
+					'type'  => 'title',
+				),
+				'auto_capture'           => array(
+					'title'   => __( 'Enable Auto Capture', 'billmate-order-management-for-woocommerce' ),
 					'type'    => 'checkbox',
-					'label'   => __( 'Enable Billmate order capture on WooCommerce order completion and Billmate order cancellation on WooCommerce order cancellation', 'billmate-order-management-for-woocommerce' ),
+					'label'   => __( 'Activate Billmate order automatically when WooCommerce order status changes to Completed.', 'billmate-order-management-for-woocommerce' ),
 					'default' => 'yes',
 				),
-				'bom_debug'        => array(
+				'auto_cancel'            => array(
+					'title'   => __( 'Enable Auto Cancel', 'billmate-order-management-for-woocommerce' ),
+					'type'    => 'checkbox',
+					'label'   => __( 'Cancel Billmate order automatically when WooCommerce order status changes to Cancelled.', 'billmate-order-management-for-woocommerce' ),
+					'default' => 'yes',
+				),
+				'auto_update'            => array(
+					'title'   => __( 'Enable Auto Update', 'billmate-order-management-for-woocommerce' ),
+					'type'    => 'checkbox',
+					'label'   => __( 'Update Billmate order automatically when WooCommerce order is updated.', 'billmate-order-management-for-woocommerce' ),
+					'default' => 'yes',
+				),
+				'bom_debug'              => array(
 					'title'   => __( 'Order Management Debug Log', 'billmate-order-management-for-woocommerce' ),
 					'type'    => 'checkbox',
 					'label'   => __( 'Enable logging', 'billmate-order-management-for-woocommerce' ),

@@ -47,8 +47,8 @@ class BOM_Order_Management {
 
 		// Check Billmate settings to see if we have the ordermanagement enabled.
 		$billmate_settings = get_option( 'woocommerce_bco_settings' );
-		$order_management  = 'yes' === $billmate_settings['order_management'] ? true : false;
-		if ( ! $order_management ) {
+		$auto_cancel       = 'yes' === $billmate_settings['auto_cancel'] ? true : false;
+		if ( ! $auto_cancel ) {
 			return;
 		}
 
@@ -107,8 +107,8 @@ class BOM_Order_Management {
 
 		// Check Billmate settings to see if we have the ordermanagement enabled.
 		$billmate_settings = get_option( 'woocommerce_bco_settings' );
-		$order_management  = 'yes' === $billmate_settings['order_management'] ? true : false;
-		if ( ! $order_management ) {
+		$auto_capture      = 'yes' === $billmate_settings['auto_capture'] ? true : false;
+		if ( ! $auto_capture ) {
 			return;
 		}
 
@@ -261,6 +261,14 @@ class BOM_Order_Management {
 
 		// Changes only possible if order is set to On Hold.
 		if ( 'on-hold' !== $order->get_status() ) {
+			return;
+		}
+
+		// Check Billmate settings to see if we have the ordermanagement enabled.
+		$billmate_settings = get_option( 'woocommerce_bco_settings' );
+		$auto_update       = 'yes' === $billmate_settings['auto_update'] ? true : false;
+
+		if ( ! $auto_update ) {
 			return;
 		}
 

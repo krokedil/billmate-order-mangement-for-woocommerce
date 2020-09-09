@@ -129,7 +129,6 @@ class BOM_Order_Management {
 		// If this reservation was already activated, do nothing.
 		if ( get_post_meta( $order_id, '_billmate_reservation_activated', true ) ) {
 			$order->add_order_note( __( 'Could not activate Billmate Checkout reservation, Billmate Checkout reservation is already activated.', 'billmate-order-management-for-woocommerce' ) );
-			$order->set_status( 'on-hold' );
 			return;
 		}
 
@@ -208,9 +207,12 @@ class BOM_Order_Management {
 			}
 			$order->add_order_note( __( 'Billmate Checkout order was successfully refunded.', 'billmate-checkout-for-woocommerce' ) );
 			return true;
+		} else {
+			// Translators: Billmate order status.
+			$note = sprintf( __( 'Billmate Checkout order could not be refunded because order has status <em>%s</em> in Billmate Online.', 'billmate-checkout-for-woocommerce' ), sanitize_key( $bco_status ) );
+			$order->add_order_note( $note );
+			return false;
 		}
-		$order->add_order_note( __( 'Billmate Checkout order could not be refunded.', 'billmate-checkout-for-woocommerce' ) );
-		return false;
 
 	}
 

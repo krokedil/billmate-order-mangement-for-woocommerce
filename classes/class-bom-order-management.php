@@ -47,8 +47,8 @@ class BOM_Order_Management {
 
 		// Check Billmate settings to see if we have the ordermanagement enabled.
 		$billmate_settings = get_option( 'woocommerce_bco_settings' );
-		$order_management  = 'yes' === $billmate_settings['order_management'] ? true : false;
-		if ( ! $order_management ) {
+		$auto_cancel       = 'yes' === $billmate_settings['auto_cancel'] ? true : false;
+		if ( ! $auto_cancel ) {
 			return;
 		}
 
@@ -107,8 +107,8 @@ class BOM_Order_Management {
 
 		// Check Billmate settings to see if we have the ordermanagement enabled.
 		$billmate_settings = get_option( 'woocommerce_bco_settings' );
-		$order_management  = 'yes' === $billmate_settings['order_management'] ? true : false;
-		if ( ! $order_management ) {
+		$auto_capture      = 'yes' === $billmate_settings['auto_capture'] ? true : false;
+		if ( ! $auto_capture ) {
 			return;
 		}
 
@@ -129,7 +129,6 @@ class BOM_Order_Management {
 		// If this reservation was already activated, do nothing.
 		if ( get_post_meta( $order_id, '_billmate_reservation_activated', true ) ) {
 			$order->add_order_note( __( 'Could not activate Billmate Checkout reservation, Billmate Checkout reservation is already activated.', 'billmate-order-management-for-woocommerce' ) );
-			$order->set_status( 'on-hold' );
 			return;
 		}
 
@@ -166,13 +165,6 @@ class BOM_Order_Management {
 		$order = wc_get_order( $order_id );
 		// If this order wasn't created using aco payment method, bail.
 		if ( 'bco' !== $order->get_payment_method() ) {
-			return false;
-		}
-
-		// Check Billmate settings to see if we have the ordermanagement enabled.
-		$billmate_settings = get_option( 'woocommerce_bco_settings' );
-		$order_management  = 'yes' === $billmate_settings['order_management'] ? true : false;
-		if ( ! $order_management ) {
 			return false;
 		}
 
@@ -215,9 +207,12 @@ class BOM_Order_Management {
 			}
 			$order->add_order_note( __( 'Billmate Checkout order was successfully refunded.', 'billmate-checkout-for-woocommerce' ) );
 			return true;
+		} else {
+			// Translators: Billmate order status.
+			$note = sprintf( __( 'Billmate Checkout order could not be refunded because order has status <em>%s</em> in Billmate Online.', 'billmate-checkout-for-woocommerce' ), sanitize_key( $bco_status ) );
+			$order->add_order_note( $note );
+			return false;
 		}
-		$order->add_order_note( __( 'Billmate Checkout order could not be refunded.', 'billmate-checkout-for-woocommerce' ) );
-		return false;
 
 	}
 
@@ -261,6 +256,14 @@ class BOM_Order_Management {
 
 		// Changes only possible if order is set to On Hold.
 		if ( 'on-hold' !== $order->get_status() ) {
+			return;
+		}
+
+		// Check Billmate settings to see if we have the ordermanagement enabled.
+		$billmate_settings = get_option( 'woocommerce_bco_settings' );
+		$auto_update       = 'yes' === $billmate_settings['auto_update'] ? true : false;
+
+		if ( ! $auto_update ) {
 			return;
 		}
 

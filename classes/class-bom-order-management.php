@@ -300,7 +300,7 @@ class BOM_Order_Management {
 	 *
 	 * @param int $order_id Order ID.
 	 */
-	public function update_bco_order_address( $order_id, $post ) {
+	public function update_bco_order_address( $order_id ) {
 		$order = wc_get_order( $order_id );
 
 		// Check if the order has been paid.

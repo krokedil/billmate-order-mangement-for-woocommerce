@@ -25,6 +25,7 @@ class BOM_Order_Management {
 
 		// Update an order.
 		add_action( 'woocommerce_saved_order_items', array( $this, 'update_bco_order_items' ), 10, 2 );
+		add_action( 'woocommerce_process_shop_order_meta', array( $this, 'update_bco_order_address' ), 45, 2 );
 	}
 
 	/**
@@ -289,6 +290,70 @@ class BOM_Order_Management {
 				}
 				$order->add_order_note( $order_note );
 			}
+		} else {
+			$order->add_order_note( __( 'Order can not be updated in Billmate Online because the current Billmate order status does not allow this.', 'billmate-checkout-for-woocommerce' ) );
+		}
+	}
+
+	/**
+	 * Updates Billmate order address.
+	 *
+	 * @param int $order_id Order ID.
+	 */
+	public function update_bco_order_address( $order_id, $post ) {
+		$order = wc_get_order( $order_id );
+
+		// Check if the order has been paid.
+		if ( null === $order->get_date_paid() ) {
+			return;
+		}
+
+		// Check if the order has been completed.
+		if ( $order->get_date_completed() ) {
+			return;
+		}
+
+		// Not going to do this for non-BCO.
+		if ( 'bco' !== $order->get_payment_method() ) {
+			return;
+		}
+
+		// Changes only possible if order is set to On Hold.
+		if ( 'on-hold' !== $order->get_status() ) {
+			return;
+		}
+
+		// Check Billmate settings to see if we have the ordermanagement enabled.
+		$billmate_settings = get_option( 'woocommerce_bco_settings' );
+		$auto_update       = 'yes' === $billmate_settings['auto_update'] ? true : false;
+
+		if ( ! $auto_update ) {
+			return;
+		}
+
+		// Retrieve transaction id from order post meta.
+		$bco_transaction_id = get_post_meta( $order_id, '_billmate_transaction_id', true );
+		// Retrieve Billmate order.
+		$billmate_order = BCO_WC()->api->request_get_payment( $bco_transaction_id );
+
+		if ( is_wp_error( $billmate_order ) ) {
+			$order->add_order_note( 'Billmate order could not be updated due to an error.' );
+			return;
+		}
+		$not_allowed_statuses = array( 'Paid', 'Pending', 'Factoring', 'PartPayment', 'Handling' );
+		if ( ! in_array( $billmate_order['data']['PaymentData']['status'], $not_allowed_statuses, true ) ) {
+			$response = BOM_WC()->api->request_update_payment( $order_id );
+			if ( ! is_wp_error( $response ) ) {
+				$order->add_order_note( 'Customer address updated in Billmate order.' );
+			} else {
+				$order_note = 'Could not update address in Billmate order.';
+				if ( '' !== $response->get_error_message() ) {
+					$order_note .= ' ' . $response->get_error_message() . '.';
+				}
+				$order->add_order_note( $order_note );
+			}
+		} else {
+			$order->add_order_note( __( 'Order can not be updated in Billmate Online because the current Billmate order status does not allow this.', 'billmate-checkout-for-woocommerce' ) );
 		}
 	}
 }

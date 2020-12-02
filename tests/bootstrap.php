@@ -66,7 +66,7 @@ class Krokedil_Unit_Tests_Bootstrap {
 	 *
 	 * @var array
 	 */
-	protected $config = [];
+	protected $config = array();
 
 	/**
 	 *
@@ -80,6 +80,8 @@ class Krokedil_Unit_Tests_Bootstrap {
 		} else {
 			throw new Exception( 'Configuration file is missing!' );
 		}
+
+		$this->set_args();
 
 		// init plugin paths.
 		$this->set_paths();
@@ -129,11 +131,14 @@ class Krokedil_Unit_Tests_Bootstrap {
 	public function load_plugin() {
 		if ( ! empty( $this->dependencies ) ) {
 			foreach ( $this->dependencies as $dir => $plugin_file ) {
-				echo $this->plugins_dir . DIRECTORY_SEPARATOR . $dir . DIRECTORY_SEPARATOR . $plugin_file;
-				require_once $this->plugins_dir . DIRECTORY_SEPARATOR . $dir . DIRECTORY_SEPARATOR . $plugin_file;
+				if ( $this->docker ) {
+					require_once  $this->tests_dir . DIRECTORY_SEPARATOR . $dir . DIRECTORY_SEPARATOR . $plugin_file;
+				} else {
+					require_once $this->plugins_dir . DIRECTORY_SEPARATOR . $dir . DIRECTORY_SEPARATOR . $plugin_file;
+				}
 			}
 		}
-		require_once $this->plugin_dir . DIRECTORY_SEPARATOR . $this->config['name'];
+		require_once $this->plugin_dir . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . $this->config['name'];
 	}
 
 	/**
@@ -190,10 +195,11 @@ class Krokedil_Unit_Tests_Bootstrap {
 	public function install_wc() {
 		WC_Install::install();
 
-		// Initialize the WC API extensions.
-		\Automattic\WooCommerce\Admin\Install::create_tables();
-		\Automattic\WooCommerce\Admin\Install::create_events();
-
+		// Only if WC is 4.0 or higher.
+		if ( class_exists( '\Automattic\WooCommerce\Admin\Install' ) ) {
+			\Automattic\WooCommerce\Admin\Install::create_tables();
+			\Automattic\WooCommerce\Admin\Install::create_events();
+		}
 		// Reload capabilities after install, see https://core.trac.wordpress.org/ticket/28374.
 		if ( version_compare( $GLOBALS['wp_version'], '4.7', '<' ) ) {
 			$GLOBALS['wp_roles']->reinit();
@@ -203,6 +209,15 @@ class Krokedil_Unit_Tests_Bootstrap {
 		}
 
 		echo esc_html( 'Installing WooCommerce...' . PHP_EOL );
+	}
+
+		/**
+		 * Sets the args for the test run.
+		 *
+		 * @return void
+		 */
+	public function set_args() {
+		$this->docker = $_ENV['docker'];
 	}
 }
 

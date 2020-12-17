@@ -5,7 +5,7 @@ Requires at least: 5.0
 Tested up to: 5.5.3
 Requires PHP: 5.6
 WC requires at least: 4.0.0
-WC tested up to: 4.7.1
+WC tested up to: 4.8.0
 Stable tag: trunk
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -33,6 +33,9 @@ For help setting up and configuring Billmate Order Management for WooCommerce pl
 * A SSL Certificate is required.
 
 == Changelog ==
+= 2020.12.17    - version 0.2.1 =
+* Fix           - Don't make activate payment request if payment was made via a direct payment method.
+
 = 2020.12.07    - version 0.2.0 =
 * Tweak         - Added readme.txt file.
 

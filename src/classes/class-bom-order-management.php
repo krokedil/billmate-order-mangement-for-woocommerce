@@ -106,6 +106,12 @@ class BOM_Order_Management {
 			return;
 		}
 
+		// Don't try to activate direct payment method orders.
+		// 16=Bank, 24=Card/Bank, 32=Cash (Receipt).
+		if ( in_array( get_post_meta( $order_id, '_billmate_payment_method_id', true ), array( '16', '24', '32' ), true ) ) {
+			return;
+		}
+
 		// Check Billmate settings to see if we have the ordermanagement enabled.
 		$billmate_settings = get_option( 'woocommerce_bco_settings' );
 		$auto_capture      = 'yes' === $billmate_settings['auto_capture'] ? true : false;

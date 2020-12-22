@@ -1,0 +1,15 @@
+{
+	"name": "billmate-order-management-for-woocommerce",
+	"version": "1.0.0",
+	"description": "Billmate order management for WooCommerce",
+	"main": "gulpfile.js",
+	"repository": "https://github.com/krokedil/Payer_B2B-for-woocommerce.git",
+	"author": "Krokedil AB",
+	"license": "GPL-3.0+",
+	"devDependencies": {
+		"gulp": "^4.0.0",
+		"gulp-sort": "^2.0.0",
+		"gulp-watch": "^4.3.11",
+		"gulp-wp-pot": "^2.3.5"
+	}
+}

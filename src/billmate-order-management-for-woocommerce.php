@@ -1,12 +1,12 @@
 <?php // phpcs:ignore
 /**
  * Plugin Name:     Billmate Order Management for WooCommerce
- * Plugin URI:      http://krokedil.com/
+ * Plugin URI:      https://billmate.se/
  * Description:     Provides order management for Billmate Checkout.
  * Version:         0.2.1
- * Author:          Krokedil
- * Author URI:      http://krokedil.com/
- * Developer:       Krokedil
+ * Author:          Billmate in collaboration with Krokedil.
+ * Author URI:      https://billmate.se/
+ * Developer:       Billmate in collaboration with Krokedil.
  * Developer URI:   http://krokedil.com/
  * Text Domain:     billmate-order-management-for-woocommerce
  * Domain Path:     /languages

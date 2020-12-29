@@ -12,6 +12,8 @@ This way you can save time and don’t have to work in both systems simultaneous
 
 # Documentation
 
+Here is the section regarding the different parts from a documentation perspective.
+
 ## Installation
 
 You can find the settings for the Billmate Order Management for WooCommerce plugin under

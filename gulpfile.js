@@ -6,7 +6,7 @@ var wpPot = require('gulp-wp-pot');
 var translateFiles = '**/*.php';
 
 gulp.task('makePOT', function () {
-	return gulp.src('**/*.php')
+	return gulp.src(translateFiles)
 		.pipe(sort())
 		.pipe(wpPot({
 			domain: 'billmate-order-management-for-woocommerce',
@@ -17,8 +17,4 @@ gulp.task('makePOT', function () {
 			team: 'Krokedil <info@krokedil.se>'
 		}))
 		.pipe(gulp.dest('src/languages/billmate-order-management-for-woocommerce.pot'));
-});
-
-gulp.task('watch', function() {
-    gulp.watch(translateFiles, ['makePOT']);
 });

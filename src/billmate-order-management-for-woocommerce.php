@@ -1,7 +1,7 @@
 <?php // phpcs:ignore
 /**
  * Plugin Name:     Billmate Order Management for WooCommerce
- * Plugin URI:      https://billmate.se/
+ * Plugin URI:      https://github.com/Billmate/billmate-order-mangement-for-woocommerce
  * Description:     Provides order management for Billmate Checkout.
  * Version:         1.0.0
  * Author:          Billmate in collaboration with Krokedil.

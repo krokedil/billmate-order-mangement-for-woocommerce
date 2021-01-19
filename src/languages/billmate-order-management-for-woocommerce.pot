@@ -8,87 +8,62 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Krokedil <info@krokedil.se>\n"
 "Last-Translator: Krokedil <info@krokedil.se>\n"
-"Last-Translator: \n"
 "Report-Msgid-Bugs-To: http://krokedil.se\n"
 "X-Poedit-Basepath: ..\n"
-"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:"
-"1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
-"esc_html_x:1,2c\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"POT-Creation-Date: 2021-01-19 08:54+0000\n"
-"PO-Revision-Date: 2021-01-19 09:36+0000\n"
-"Language: sv-SE\n"
-"X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.5.0; wp-5.6"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../billmate-order-management-for-woocommerce.php:144
 msgid "Order management"
-msgstr "Order management"
+msgstr ""
 
 #: ../billmate-order-management-for-woocommerce.php:148
 msgid "Enable Auto Capture"
 msgstr ""
-"Aktivera Automatisk Aktivering \n"
 
 #: ../billmate-order-management-for-woocommerce.php:150
-msgid ""
-"Activate Billmate order automatically when WooCommerce order status changes "
-"to Completed."
+msgid "Activate Billmate order automatically when WooCommerce order status changes to Completed."
 msgstr ""
-"Aktivera Billmate ordrar automatiskt när WooCommerce ordern ändras till "
-"Färdigbehandlad."
 
 #: ../billmate-order-management-for-woocommerce.php:154
 msgid "Enable Auto Cancel"
 msgstr ""
-"Aktivera Automatisk Makulering\n"
 
 #: ../billmate-order-management-for-woocommerce.php:156
-msgid ""
-"Cancel Billmate order automatically when WooCommerce order status changes to "
-"Cancelled."
+msgid "Cancel Billmate order automatically when WooCommerce order status changes to Cancelled."
 msgstr ""
-"Avbryt Billmate ordrar automatiskt när WooCommerce ordern ändras till "
-"Avbruten."
 
 #: ../billmate-order-management-for-woocommerce.php:160
 msgid "Enable Auto Update"
-msgstr "Aktivera Automatisk Uppdatering"
+msgstr ""
 
 #: ../billmate-order-management-for-woocommerce.php:162
 msgid "Update Billmate order automatically when WooCommerce order is updated."
 msgstr ""
-"Uppdatera Billmate ordrar automatiskt när WooCommerce ordern uppdateras.\n"
 
 #: ../billmate-order-management-for-woocommerce.php:166
 msgid "Order Management Debug Log"
 msgstr ""
-"Felsökningslogg för orderhantering\n"
 
 #: ../billmate-order-management-for-woocommerce.php:168
 msgid "Enable logging"
-msgstr "Aktivera loggning"
+msgstr ""
 
 #: ../billmate-order-management-for-woocommerce.php:197
 msgid "Support"
-msgstr "Support"
+msgstr ""
 
 #: ../classes/class-bom-order-management.php:138
-msgid ""
-"Could not activate Billmate Checkout reservation, Billmate Checkout "
-"reservation is already activated."
+msgid "Could not activate Billmate Checkout reservation, Billmate Checkout reservation is already activated."
 msgstr ""
-"Det gick inte att aktivera Billmate Checkout reservation, Billmate Checkout "
-"reservationen är redan aktiverad."
 
 #: ../classes/class-bom-order-management.php:157
 msgid "Billmate reservation was successfully activated."
 msgstr ""
-"Billmate reservationen har aktiverats.\n"
 
 #: ../classes/class-bom-order-management.php:150
 msgid "Billmate API Error on Billmate activate order: "
-msgstr "Makulerar ordrar i Billmate Online när ordern får status completed\t"
+msgstr ""

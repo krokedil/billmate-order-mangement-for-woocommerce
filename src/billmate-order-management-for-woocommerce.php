@@ -3,7 +3,7 @@
  * Plugin Name:     Billmate Order Management for WooCommerce
  * Plugin URI:      https://billmate.se/
  * Description:     Provides order management for Billmate Checkout.
- * Version:         0.2.1
+ * Version:         1.0.0
  * Author:          Billmate in collaboration with Krokedil.
  * Author URI:      https://billmate.se/
  * Developer:       Billmate in collaboration with Krokedil.
@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define plugin constants.
-define( 'BILLMATE_ORDER_MANAGEMENT_VERSION', '0.2.1' );
+define( 'BILLMATE_ORDER_MANAGEMENT_VERSION', '1.0.0' );
 define( 'BILLMATE_ORDER_MANAGEMENT_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
 define( 'BILLMATE_ORDER_MANAGEMENT_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'BILLMATE_ORDER_MANAGEMENT_ENV', 'https://api.billmate.se' );

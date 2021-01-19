@@ -33,6 +33,9 @@ For help setting up and configuring Billmate Order Management for WooCommerce pl
 * A SSL Certificate is required.
 
 == Changelog ==
+= 2021.01.19    - version 1.0.0 =
+* Release       - First release of new Billmate Order Management for WooCommerce
+
 = 2020.12.17    - version 0.2.1 =
 * Fix           - Don't make activate payment request if payment was made via a direct payment method.
 

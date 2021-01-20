@@ -12,6 +12,8 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 == DESCRIPTION ==
 
+When an order is created in WooCommerce and a order number exists in Billmates system, you have the possibility to handle the order management in Billmate directly from WooCommerce.
+This way you can save time and don’t have to work in both systems simultaneously.
 
 == Installation ==
 1. Upload plugin folder to to the "/wp-content/plugins/" directory.

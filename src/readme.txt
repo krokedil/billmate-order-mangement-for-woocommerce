@@ -6,7 +6,7 @@ Tested up to: 5.5.3
 Requires PHP: 5.6
 WC requires at least: 4.0.0
 WC tested up to: 4.8.0
-Stable tag: trunk
+Stable tag: __STABLE_TAG__
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -42,7 +42,7 @@ For help setting up and configuring Billmate Order Management for WooCommerce pl
 * A SSL Certificate is required.
 
 == Changelog ==
-= 2021.01.19    - version 1.0.0 =
+= 2021.01.25    - version 1.0.0 =
 * Release       - First release of new Billmate Order Management for WooCommerce
 
 = 2020.12.17    - version 0.2.1 =

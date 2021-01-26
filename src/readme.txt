@@ -18,9 +18,11 @@ This way you can save time and don’t have to work in both systems simultaneous
 
 This plugin is relying upon the payment provider Billmate. The payment data will be sent to them as a 3rd party service through the Billmate API.
 
-* Billmate website: https://www.billmate.se/
-* Billmate API documentation: https://billmate.github.io/api-docs/
-* Billmate terms, privacy policy and other policies: https://www.billmate.se/policyer/
+[plugin documentation](https://docs.krokedil.com/article/366-billmate-order-management-introduction)
+
+* Billmate website: [https://www.billmate.se/](https://www.billmate.se/)
+* Billmate API documentation: [https://billmate.github.io/api-docs/](https://billmate.github.io/api-docs/)
+* Billmate terms, privacy policy and other policies: [https://www.billmate.se/policyer/](https://www.billmate.se/policyer/)
 
 
 == Installation ==

@@ -17,9 +17,6 @@ This way you can save time and don’t have to work in both systems simultaneous
 
 
 This plugin is relying upon the payment provider Billmate. The payment data will be sent to them as a 3rd party service through the Billmate API.
-
-[plugin documentation](https://docs.krokedil.com/article/366-billmate-order-management-introduction)
-
 * Billmate website: [https://www.billmate.se/](https://www.billmate.se/)
 * Billmate API documentation: [https://billmate.github.io/api-docs/](https://billmate.github.io/api-docs/)
 * Billmate terms, privacy policy and other policies: [https://www.billmate.se/policyer/](https://www.billmate.se/policyer/)
@@ -37,7 +34,7 @@ This plugin is relying upon the payment provider Billmate. The payment data will
 Billmate Checkout works for merchants in Sweden.
 
 = Where can I find Billmate Order Management for WooCommerce documentation? =
-For help setting up and configuring Billmate Order Management for WooCommerce please refer to our [documentation](https://docs.krokedil.com/article/366-billmate-order-management-introduction).
+For help setting up and configuring Billmate Order Management for WooCommerce please refer to our [documentation](https://support.billmate.se/hc/sv/sections/360004888977-Billmate-Checkout-WooCommerce-V2).
 
 = I have a suggestion for an improvement or a feature request =
 We have a portal for users to provide feedback, [https://woocommerce.portal.billmate.se/](https://woocommerce.portal.billmate.se/). If you subit your idea here you will get notified with updates on your idea.

@@ -26,7 +26,7 @@ This plugin is relying upon the payment provider Billmate. The payment data will
 1. Upload plugin folder to to the "/wp-content/plugins/" directory.
 2. Activate the plugin through the "Plugins" menu in WordPress.
 3. Go WooCommerce Settings –> Payment Gateways –> Billmate Checkout and configure your Billmate Order Management settings.
-4. Read more about the configuration process in the [plugin documentation].(https://support.billmate.se/hc/sv/sections/360001483157-WooCommerce-Billmate-Checkout).
+4. Read more about the configuration process in the [plugin documentation].(https://support.billmate.se/hc/sv/articles/360017264318).
 
 
 == Frequently Asked Questions ==
@@ -34,10 +34,10 @@ This plugin is relying upon the payment provider Billmate. The payment data will
 Billmate Checkout works for merchants in Sweden.
 
 = Where can I find Billmate Order Management for WooCommerce documentation? =
-For help setting up and configuring Billmate Order Management for WooCommerce please refer to our [documentation](https://support.billmate.se/hc/sv/articles/360017264318-Order-Hantering-Order-Management-Plugin-).
+For help setting up and configuring Billmate Order Management for WooCommerce please refer to our [documentation](https://support.billmate.se/hc/sv/articles/360017264318).
 
 = I have a suggestion for an improvement or a feature request =
-We have a portal for users to provide feedback, [https://woocommerce.portal.billmate.se/](https://woocommerce.portal.billmate.se/). If you subit your idea here you will get notified with updates on your idea.
+We have a portal for users to provide feedback, [https://woocommerce.portal.billmate.se/](https://woocommerce.portal.billmate.se/). If you submit your idea here you will get notified with updates on your idea.
 
 = I have found a bug, where should I report it? =
 The easiest way to report a bug is to email us at [support@billmate.se](mailto:support@billmate.se). If you however are a developer you can feel free to raise an issue on GitHub, [https://github.com/Billmate/billmate-order-mangement-for-woocommerce](https://github.com/Billmate/billmate-order-mangement-for-woocommerce).

@@ -4,9 +4,9 @@
  * Plugin URI:      https://github.com/Billmate/billmate-order-mangement-for-woocommerce
  * Description:     Provides order management for Billmate Checkout.
  * Version:         __STABLE_TAG__
- * Author:          Billmate in collaboration with Krokedil.
+ * Author:          Billmate, Krokedil
  * Author URI:      https://billmate.se/
- * Developer:       Billmate in collaboration with Krokedil.
+ * Developer:       Billmate, Krokedil
  * Developer URI:   http://krokedil.com/
  * Text Domain:     billmate-order-management-for-woocommerce
  * Domain Path:     /languages

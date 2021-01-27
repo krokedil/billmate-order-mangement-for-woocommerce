@@ -15,19 +15,17 @@ Provides post-purchase order management for Billmate Checkout for WooCommerce pa
 Handle returns, activations and cancellations automatically without having to login to the Billmate merchant portal, Billmate Online.
 This way you can save time and don’t have to work in both systems simultaneously.
 
-
+=== Privacy ===
 This plugin is relying upon the payment provider Billmate. The payment data will be sent to them as a 3rd party service through the Billmate API.
-* Billmate website: [https://www.billmate.se/](https://www.billmate.se/)
-* Billmate API documentation: [https://billmate.github.io/api-docs/](https://billmate.github.io/api-docs/)
-* Billmate terms, privacy policy and other policies: [https://www.billmate.se/policyer/](https://www.billmate.se/policyer/)
-
+* Billmate website: https://www.billmate.se/
+* Billmate API documentation: https://billmate.github.io/api-docs/
+* Billmate terms and privacy policies: https://www.billmate.se/policyer/
 
 == Installation ==
 1. Upload plugin folder to to the "/wp-content/plugins/" directory.
 2. Activate the plugin through the "Plugins" menu in WordPress.
 3. Go WooCommerce Settings –> Payment Gateways –> Billmate Checkout and configure your Billmate Order Management settings.
 4. Read more about the configuration process in the [plugin documentation].(https://support.billmate.se/hc/sv/articles/360017264318).
-
 
 == Frequently Asked Questions ==
 = Which countries does this payment gateway support? =
@@ -41,7 +39,6 @@ We have a portal for users to provide feedback, [https://woocommerce.portal.bill
 
 = I have found a bug, where should I report it? =
 The easiest way to report a bug is to email us at [support@billmate.se](mailto:support@billmate.se). If you however are a developer you can feel free to raise an issue on GitHub, [https://github.com/Billmate/billmate-order-mangement-for-woocommerce](https://github.com/Billmate/billmate-order-mangement-for-woocommerce).
-
 
 == Changelog ==
 = 2021.01.25    - version 1.0.0 =

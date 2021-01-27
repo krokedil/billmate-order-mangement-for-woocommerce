@@ -34,7 +34,7 @@ This plugin is relying upon the payment provider Billmate. The payment data will
 Billmate Checkout works for merchants in Sweden.
 
 = Where can I find Billmate Order Management for WooCommerce documentation? =
-For help setting up and configuring Billmate Order Management for WooCommerce please refer to our [documentation](https://support.billmate.se/hc/sv/sections/360004888977-Billmate-Checkout-WooCommerce-V2).
+For help setting up and configuring Billmate Order Management for WooCommerce please refer to our [documentation](https://support.billmate.se/hc/sv/articles/360017264318-Order-Hantering-Order-Management-Plugin-).
 
 = I have a suggestion for an improvement or a feature request =
 We have a portal for users to provide feedback, [https://woocommerce.portal.billmate.se/](https://woocommerce.portal.billmate.se/). If you subit your idea here you will get notified with updates on your idea.

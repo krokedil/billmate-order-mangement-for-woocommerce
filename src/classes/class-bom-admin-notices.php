@@ -22,13 +22,6 @@ class BOM_Admin_Notices {
 	protected static $instance;
 
 	/**
-	 * Checks if BOM gateway is enabled.
-	 *
-	 * @var $enabled
-	 */
-	protected $enabled;
-
-	/**
 	 * Returns the *Singleton* instance of this class.
 	 *
 	 * @return self::$instance The *Singleton* instance.

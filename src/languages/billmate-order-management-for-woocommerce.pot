@@ -1,4 +1,4 @@
-# Copyright (C) 2020 billmate-order-management-for-woocommerce
+# Copyright (C) 2021 billmate-order-management-for-woocommerce
 # This file is distributed under the same license as the billmate-order-management-for-woocommerce package.
 msgid ""
 msgstr ""
@@ -16,54 +16,58 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../billmate-order-management-for-woocommerce.php:144
+#: ../billmate-order-management-for-woocommerce.php:145
 msgid "Order management"
 msgstr ""
 
-#: ../billmate-order-management-for-woocommerce.php:148
+#: ../billmate-order-management-for-woocommerce.php:149
 msgid "Enable Auto Capture"
 msgstr ""
 
-#: ../billmate-order-management-for-woocommerce.php:150
+#: ../billmate-order-management-for-woocommerce.php:151
 msgid "Activate Billmate order automatically when WooCommerce order status changes to Completed."
 msgstr ""
 
-#: ../billmate-order-management-for-woocommerce.php:154
+#: ../billmate-order-management-for-woocommerce.php:155
 msgid "Enable Auto Cancel"
 msgstr ""
 
-#: ../billmate-order-management-for-woocommerce.php:156
+#: ../billmate-order-management-for-woocommerce.php:157
 msgid "Cancel Billmate order automatically when WooCommerce order status changes to Cancelled."
 msgstr ""
 
-#: ../billmate-order-management-for-woocommerce.php:160
+#: ../billmate-order-management-for-woocommerce.php:161
 msgid "Enable Auto Update"
 msgstr ""
 
-#: ../billmate-order-management-for-woocommerce.php:162
+#: ../billmate-order-management-for-woocommerce.php:163
 msgid "Update Billmate order automatically when WooCommerce order is updated."
 msgstr ""
 
-#: ../billmate-order-management-for-woocommerce.php:166
+#: ../billmate-order-management-for-woocommerce.php:167
 msgid "Order Management Debug Log"
 msgstr ""
 
-#: ../billmate-order-management-for-woocommerce.php:168
+#: ../billmate-order-management-for-woocommerce.php:169
 msgid "Enable logging"
 msgstr ""
 
-#: ../billmate-order-management-for-woocommerce.php:197
+#: ../billmate-order-management-for-woocommerce.php:198
 msgid "Support"
 msgstr ""
 
-#: ../classes/class-bom-order-management.php:138
-msgid "Could not activate Billmate Checkout reservation, Billmate Checkout reservation is already activated."
-msgstr ""
-
-#: ../classes/class-bom-order-management.php:157
-msgid "Billmate reservation was successfully activated."
+#: ../classes/class-bom-admin-notices.php:87
+msgid "It looks as you have both <i>Billmate Payment Gateway for WooCommerce</i> and <i>Billmate Order Management</i> plugin activated. Make sure to deactivate order management in the old Billmate plugin since this can be handled via the Billmate Order Management plugin, even for orders created in the old Billmate plugin."
 msgstr ""
 
 #: ../classes/class-bom-order-management.php:150
+msgid "Could not activate Billmate Checkout reservation, Billmate Checkout reservation is already activated."
+msgstr ""
+
+#: ../classes/class-bom-order-management.php:169
+msgid "Billmate reservation was successfully activated."
+msgstr ""
+
+#: ../classes/class-bom-order-management.php:162
 msgid "Billmate API Error on Billmate activate order: "
 msgstr ""

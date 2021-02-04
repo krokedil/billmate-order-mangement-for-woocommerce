@@ -118,6 +118,12 @@ class BOM_Order_Management {
 			return;
 		}
 
+		// Don't try to activate direct payment method orders.
+		// Only check this for the old billmate_checkout payment method.
+		if ( 'billmate_checkout' === $order->get_payment_method() && in_array( $order->get_payment_method_title(), array( 'Billmate Checkout (Direktbetalning)', 'Billmate Checkout (Swish)' ), true ) ) {
+			return;
+		}
+
 		// Check Billmate settings to see if we have the ordermanagement enabled.
 		$billmate_settings = get_option( 'woocommerce_bco_settings' );
 		$auto_capture      = 'yes' === $billmate_settings['auto_capture'] ? true : false;

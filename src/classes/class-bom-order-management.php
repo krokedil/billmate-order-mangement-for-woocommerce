@@ -36,8 +36,8 @@ class BOM_Order_Management {
 	 */
 	public function cancel_reservation( $order_id ) {
 		$order = wc_get_order( $order_id );
-		// If this order wasn't created using aco payment method, bail.
-		if ( 'bco' !== $order->get_payment_method() ) {
+		// If this order wasn't created using bco or billmate_checkout payment method, bail.
+		if ( ! in_array( $order->get_payment_method(), array( 'bco', 'billmate_checkout', 'billmate_partpayment', 'billmate_cardpay', 'billmate_invoice' ), true ) ) {
 			return;
 		}
 
@@ -55,8 +55,13 @@ class BOM_Order_Management {
 
 		$subscription = $this->check_if_subscription( $order );
 
-		// Check if we have a order number.
-		$bco_transaction_id = get_post_meta( $order_id, '_billmate_transaction_id', true );
+		// Check if we have a transaction id.
+		if ( 'bco' === $order->get_payment_method() ) {
+			$bco_transaction_id = get_post_meta( $order_id, '_billmate_transaction_id', true );
+		} else {
+			// Old Billmate plugin.
+			$bco_transaction_id = get_post_meta( $order_id, 'billmate_invoice_id', true );
+		}
 		if ( empty( $bco_transaction_id ) ) {
 			$order->add_order_note( __( 'Billmate Checkout reservation could not be cancelled. Missing Billmate transaction id.', 'billmate-order-managment-for-woocommerce' ) );
 			$order->set_status( 'on-hold' );
@@ -96,8 +101,8 @@ class BOM_Order_Management {
 	 */
 	public function activate_reservation( $order_id ) {
 		$order = wc_get_order( $order_id );
-		// If this order wasn't created using aco payment method, bail.
-		if ( 'bco' !== $order->get_payment_method() ) {
+		// If this order wasn't created using bco or billmate_checkout payment method, bail.
+		if ( ! in_array( $order->get_payment_method(), array( 'bco', 'billmate_checkout', 'billmate_invoice', 'billmate_partpayment' ), true ) ) {
 			return;
 		}
 
@@ -108,7 +113,14 @@ class BOM_Order_Management {
 
 		// Don't try to activate direct payment method orders.
 		// 16=Bank, 24=Card/Bank, 32=Cash (Receipt).
-		if ( in_array( get_post_meta( $order_id, '_billmate_payment_method_id', true ), array( '16', '24', '32' ), true ) ) {
+		// Only check this for bco payment method. Not the old billmate_checkout.
+		if ( 'bco' === $order->get_payment_method() && in_array( get_post_meta( $order_id, '_billmate_payment_method_id', true ), array( '16', '24', '32' ), true ) ) {
+			return;
+		}
+
+		// Don't try to activate direct payment method orders.
+		// Only check this for the old billmate_checkout payment method.
+		if ( 'billmate_checkout' === $order->get_payment_method() && in_array( $order->get_payment_method_title(), array( 'Billmate Checkout (Direktbetalning)', 'Billmate Checkout (Swish)' ), true ) ) {
 			return;
 		}
 
@@ -126,7 +138,13 @@ class BOM_Order_Management {
 		}
 
 		// Check if we have a transaction id.
-		$bco_transaction_id = get_post_meta( $order_id, '_billmate_transaction_id', true );
+		if ( 'bco' === $order->get_payment_method() ) {
+			$bco_transaction_id = get_post_meta( $order_id, '_billmate_transaction_id', true );
+		} else {
+			// Old Billmate plugin.
+			$bco_transaction_id = get_post_meta( $order_id, 'billmate_invoice_id', true );
+		}
+
 		if ( empty( $bco_transaction_id ) ) {
 			$order->add_order_note( __( 'Billmate Checkout reservation could not be activated. Missing Billmate transaction id.', 'billmate-order-managment-for-woocommerce' ) );
 			$order->set_status( 'on-hold' );

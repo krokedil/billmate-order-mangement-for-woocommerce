@@ -12,9 +12,9 @@
  * Domain Path:     /languages
  *
  * WC requires at least: 4.0.0
- * WC tested up to: 4.8.0
+ * WC tested up to: 4.9.2
  *
- * Copyright:       © 2020 Billmate in collaboration with Krokedil.
+ * Copyright:       © 2020-2021 Billmate in collaboration with Krokedil.
  * License:         GNU General Public License v3.0
  * License URI:     http://www.gnu.org/licenses/gpl-3.0.html
  *
@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define plugin constants.
-define( 'BILLMATE_ORDER_MANAGEMENT_VERSION', '1.0.2' );
+define( 'BILLMATE_ORDER_MANAGEMENT_VERSION', '1.1.0' );
 define( 'BILLMATE_ORDER_MANAGEMENT_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
 define( 'BILLMATE_ORDER_MANAGEMENT_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'BILLMATE_ORDER_MANAGEMENT_ENV', 'https://api.billmate.se' );
@@ -116,6 +116,7 @@ if ( ! class_exists( 'Billmate_Order_Management_For_WooCommerce' ) ) {
 			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/class-bom-logger.php';
 			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/class-bom-order-management.php';
 			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/class-bom-request.php';
+			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/class-bom-admin-notices.php';
 
 			// Requests.
 			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/requests/order-management/post/class-bom-request-activate-payment.php';

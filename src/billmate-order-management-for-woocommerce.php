@@ -116,6 +116,7 @@ if ( ! class_exists( 'Billmate_Order_Management_For_WooCommerce' ) ) {
 			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/class-bom-logger.php';
 			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/class-bom-order-management.php';
 			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/class-bom-request.php';
+			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/class-bom-admin-notices.php';
 
 			// Requests.
 			include_once BILLMATE_ORDER_MANAGEMENT_PATH . '/classes/requests/order-management/post/class-bom-request-activate-payment.php';

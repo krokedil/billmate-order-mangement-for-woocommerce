@@ -42,7 +42,7 @@ The easiest way to report a bug is to email us at [support@billmate.se](mailto:s
 
 == Changelog ==
 = 2021.02.08    - version 1.1.0 =
-* feature       - Add support to handle Activations and Cancelations for orders created via old Billmate plugin.
+* Feature       - Add support to handle Activations and Cancelations for orders created via old Billmate plugin.
 
 = 2021.01.28    - version 1.0.2 =
 * Tweak         - Add Swedish translation files

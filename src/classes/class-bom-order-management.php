@@ -217,7 +217,7 @@ class BOM_Order_Management {
 
 		$bco_status = strtolower( $billmate_order_tmp['data']['PaymentData']['status'] );
 
-		if ( 'paid' === $bco_status || 'created' === $bco_status ) {
+		if ( 'paid' === $bco_status || 'created' === $bco_status || 'partpayment' === $bco_status ) {
 			$refund_order_id = BOM_Refund_Data_Helper::get_refunded_order( $order_id );
 			$refund_data     = BOM_Refund_Data_Helper::create_refund_data( $order_id, $refund_order_id, $amount, $reason );
 			$billmate_order  = BOM_WC()->api->request_credit_payment( $bco_transaction_id, $refund_data );

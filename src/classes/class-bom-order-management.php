@@ -112,9 +112,9 @@ class BOM_Order_Management {
 		}
 
 		// Don't try to activate direct payment method orders.
-		// 16=Bank, 24=Card/Bank, 32=Cash (Receipt).
+		// 16=Bank, 24=Card/Bank, 32=Cash (Receipt), 1024=Swish.
 		// Only check this for bco payment method. Not the old billmate_checkout.
-		if ( 'bco' === $order->get_payment_method() && in_array( get_post_meta( $order_id, '_billmate_payment_method_id', true ), array( '16', '24', '32' ), true ) ) {
+		if ( 'bco' === $order->get_payment_method() && in_array( get_post_meta( $order_id, '_billmate_payment_method_id', true ), array( '16', '24', '32', '1024' ), true ) ) {
 			return;
 		}
 

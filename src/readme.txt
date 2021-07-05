@@ -2,10 +2,10 @@
 Contributors: Billmate, Krokedil, NiklasHogefjord
 Tags: woocommerce, billmate, ecommerce, e-commerce, checkout, swish, invoice, part-payment, partpayment, card, mastercard, visa, trustly
 Requires at least: 5.0
-Tested up to: 5.7
+Tested up to: 5.7.2
 Requires PHP: 5.6
 WC requires at least: 4.0.0
-WC tested up to: 5.1.0
+WC tested up to: 5.4.1
 Stable tag: __STABLE_TAG__
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -41,6 +41,11 @@ We have a portal for users to provide feedback, [https://woocommerce.portal.bill
 The easiest way to report a bug is to email us at [support@billmate.se](mailto:support@billmate.se). If you however are a developer you can feel free to raise an issue on GitHub, [https://github.com/Billmate/billmate-order-mangement-for-woocommerce](https://github.com/Billmate/billmate-order-mangement-for-woocommerce).
 
 == Changelog ==
+
+= 2021.07.05    - version 1.2.0 =
+* Feature       - Add action bco_callback_denied_order. Trigger cancel order request if denied order callback is performed from Billmate.
+* Fix           - PHP8 warning fix.
+
 = 2021.04.07    - version 1.1.2 =
 * Fix           - Don't try to activate orders with Swish as payment method.
 

@@ -12,7 +12,7 @@
  * Domain Path:     /languages
  *
  * WC requires at least: 4.0.0
- * WC tested up to: 5.1.0
+ * WC tested up to: 5.4.1
  *
  * Copyright:       © 2020-2021 Billmate in collaboration with Krokedil.
  * License:         GNU General Public License v3.0
@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define plugin constants.
-define( 'BILLMATE_ORDER_MANAGEMENT_VERSION', '1.1.2' );
+define( 'BILLMATE_ORDER_MANAGEMENT_VERSION', '1.2.0' );
 define( 'BILLMATE_ORDER_MANAGEMENT_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
 define( 'BILLMATE_ORDER_MANAGEMENT_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'BILLMATE_ORDER_MANAGEMENT_ENV', 'https://api.billmate.se' );
@@ -81,7 +81,7 @@ if ( ! class_exists( 'Billmate_Order_Management_For_WooCommerce' ) ) {
 		 *
 		 * @return void
 		 */
-		private function __wakeup() {
+		public function __wakeup() {
 			wc_doing_it_wrong( __FUNCTION__, __( 'Nope' ), '1.0' );
 		}
 

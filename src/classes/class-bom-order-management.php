@@ -20,6 +20,9 @@ class BOM_Order_Management {
 		add_action( 'woocommerce_order_status_cancelled', array( $this, 'cancel_reservation' ) );
 		add_action( 'woocommerce_order_status_completed', array( $this, 'activate_reservation' ) );
 
+		// Cancel order triggered by denied callback from Billmate.
+		add_action( 'bco_callback_denied_order', array( $this, 'cancel_reservation' ) );
+
 		// Refund an order.
 		add_filter( 'wc_billmate_checkout_process_refund', array( $this, 'refund_billmate_order' ), 10, 4 );
 

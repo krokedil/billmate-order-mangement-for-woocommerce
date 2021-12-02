@@ -7,8 +7,8 @@ This way you can save time and don’t have to work in both systems simultaneous
 # Requirements
 
 * You need an [agreement with Billmate](https://www.billmate.se/kontakt/) to be able to use this plugin.
-* WooCommerce 3.0 or newer is required.
-* PHP 5.6 or higher is required.
+* WooCommerce 4.0 or newer is required.
+* PHP 7.0 or higher is required.
 * SSL Certificate is required.
 * You need to have the [Billmate Checkout for WooCommerce plugin](https://github.com/Billmate/billmate-checkout-for-woocommerce) installed and activated.
 

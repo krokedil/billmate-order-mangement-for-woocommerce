@@ -195,7 +195,7 @@ if ( ! class_exists( 'Billmate_Order_Management_For_WooCommerce' ) ) {
 		 */
 		public function plugin_action_links( $links ) {
 			$plugin_links = array(
-				'<a href="http://krokedil.se/">' . __( 'Support', 'billmate-order-management-for-woocommerce' ) . '</a>',
+				'<a href="https://qvickly.io/kundsupport/">' . __( 'Support', 'billmate-order-management-for-woocommerce' ) . '</a>',
 			);
 			return array_merge( $plugin_links, $links );
 		}

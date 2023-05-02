@@ -25,7 +25,7 @@ class BOM_Request_Update_Payment extends BOM_Request {
 	/**
 	 * Makes the request.
 	 *
-	 * @param string $order_id Billmate transaction id.
+	 * @param string $order_id Qvickly transaction id.
 	 *
 	 * @return array
 	 */
@@ -71,7 +71,7 @@ class BOM_Request_Update_Payment extends BOM_Request {
 	/**
 	 * Gets the request args for the API call.
 	 *
-	 * @param string $order_id Billmate transaction id.
+	 * @param string $order_id Qvickly transaction id.
 	 *
 	 * @return array
 	 */

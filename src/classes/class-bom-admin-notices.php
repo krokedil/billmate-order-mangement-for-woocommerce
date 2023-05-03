@@ -43,7 +43,7 @@ class BOM_Admin_Notices {
 		$this->auto_capture = isset( $settings['auto_capture'] ) ? $settings['auto_capture'] : 'no';
 		$this->auto_cancel  = isset( $settings['auto_cancel'] ) ? $settings['auto_cancel'] : 'no';
 
-		// Old Billmate plugin settings.
+		// Old Qvickly plugin settings.
 		$this->old_billmate_auto_capture = null !== get_option( 'billmate_common_activateonstatus' ) ? get_option( 'billmate_common_activateonstatus' ) : 'no';
 		$this->old_billmate_auto_cancel  = null !== get_option( 'billmate_common_cancelonstatus' ) ? get_option( 'billmate_common_cancelonstatus' ) : 'no';
 
@@ -77,7 +77,7 @@ class BOM_Admin_Notices {
 			if ( class_exists( 'WC_Gateway_Billmate_Checkout' ) ) {
 				?>
 				<div class="bco-message notice woocommerce-message notice-error">
-					<?php echo wp_kses_post( wpautop( '<p>' . __( 'It looks as you have both <i>Billmate Payment Gateway for WooCommerce</i> and <i>Billmate Order Management</i> plugin activated. Make sure to deactivate order management in the old Billmate plugin since this can be handled via the Billmate Order Management plugin, even for orders created in the old Billmate plugin.', 'billmate-order-management-for-woocommerce' ) . '</p>' ) ); ?>
+					<?php echo wp_kses_post( wpautop( '<p>' . __( 'It looks as you have both <i>Qvickly Payment Gateway for WooCommerce</i> and <i>Qvickly Order Management</i> plugin activated. Make sure to deactivate order management in the old Billmate plugin since this can be handled via the Qvickly Order Management plugin, even for orders created in the old Billmate plugin.', 'billmate-order-management-for-woocommerce' ) . '</p>' ) ); ?>
 				</div>
 				<?php
 			}

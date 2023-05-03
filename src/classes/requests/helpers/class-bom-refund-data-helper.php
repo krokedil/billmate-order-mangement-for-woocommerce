@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 /**
- * Creates Billmate refund data.
+ * Creates Qvickly refund data.
  *
  * @class    BOM_Refund_Data_Helper
  * @package  Avarda_Order_Management/Classes/Requests/Helpers

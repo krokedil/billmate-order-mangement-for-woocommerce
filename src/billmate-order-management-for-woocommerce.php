@@ -1,8 +1,8 @@
 <?php // phpcs:ignore
 /**
- * Plugin Name:     Billmate Order Management for WooCommerce
+ * Plugin Name:     Qvickly Order Management for WooCommerce
  * Plugin URI:      https://github.com/Billmate/billmate-order-mangement-for-woocommerce
- * Description:     Provides order management for Billmate Checkout.
+ * Description:     Provides order management for Qvickly Checkout.
  * Version:         __STABLE_TAG__
  * Author:          Billmate, Krokedil
  * Author URI:      https://billmate.se/
@@ -134,7 +134,7 @@ if ( ! class_exists( 'Billmate_Order_Management_For_WooCommerce' ) ) {
 		}
 
 		/**
-		 * Add Billmate order management settings.
+		 * Add Qvickly order management settings.
 		 *
 		 * @param array $settings BCO settings.
 		 * @return array $settings BCO settings with added BOM settings.
@@ -148,19 +148,19 @@ if ( ! class_exists( 'Billmate_Order_Management_For_WooCommerce' ) ) {
 				'auto_capture'           => array(
 					'title'   => __( 'Enable Auto Capture', 'billmate-order-management-for-woocommerce' ),
 					'type'    => 'checkbox',
-					'label'   => __( 'Activate Billmate order automatically when WooCommerce order status changes to Completed.', 'billmate-order-management-for-woocommerce' ),
+					'label'   => __( 'Activate Qvickly order automatically when WooCommerce order status changes to Completed.', 'billmate-order-management-for-woocommerce' ),
 					'default' => 'yes',
 				),
 				'auto_cancel'            => array(
 					'title'   => __( 'Enable Auto Cancel', 'billmate-order-management-for-woocommerce' ),
 					'type'    => 'checkbox',
-					'label'   => __( 'Cancel Billmate order automatically when WooCommerce order status changes to Cancelled.', 'billmate-order-management-for-woocommerce' ),
+					'label'   => __( 'Cancel Qvickly order automatically when WooCommerce order status changes to Cancelled.', 'billmate-order-management-for-woocommerce' ),
 					'default' => 'yes',
 				),
 				'auto_update'            => array(
 					'title'   => __( 'Enable Auto Update', 'billmate-order-management-for-woocommerce' ),
 					'type'    => 'checkbox',
-					'label'   => __( 'Update Billmate order automatically when WooCommerce order is updated.', 'billmate-order-management-for-woocommerce' ),
+					'label'   => __( 'Update Qvickly order automatically when WooCommerce order is updated.', 'billmate-order-management-for-woocommerce' ),
 					'default' => 'yes',
 				),
 				'bom_debug'              => array(
@@ -175,7 +175,7 @@ if ( ! class_exists( 'Billmate_Order_Management_For_WooCommerce' ) ) {
 		}
 
 		/**
-		 * Add refunds support to Billmate Payments gateway.
+		 * Add refunds support to Qvickly Payments gateway.
 		 *
 		 * @param array $features Supported features.
 		 *
@@ -195,7 +195,7 @@ if ( ! class_exists( 'Billmate_Order_Management_For_WooCommerce' ) ) {
 		 */
 		public function plugin_action_links( $links ) {
 			$plugin_links = array(
-				'<a href="http://krokedil.se/">' . __( 'Support', 'billmate-order-management-for-woocommerce' ) . '</a>',
+				'<a href="https://qvickly.io/kundsupport/">' . __( 'Support', 'billmate-order-management-for-woocommerce' ) . '</a>',
 			);
 			return array_merge( $plugin_links, $links );
 		}

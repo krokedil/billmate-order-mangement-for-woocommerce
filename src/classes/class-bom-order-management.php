@@ -20,7 +20,7 @@ class BOM_Order_Management {
 		add_action( 'woocommerce_order_status_cancelled', array( $this, 'cancel_reservation' ) );
 		add_action( 'woocommerce_order_status_completed', array( $this, 'activate_reservation' ) );
 
-		// Cancel order triggered by denied callback from Billmate.
+		// Cancel order triggered by denied callback from Qvickly.
 		add_action( 'bco_callback_denied_order', array( $this, 'cancel_reservation' ) );
 
 		// Refund an order.
@@ -49,7 +49,7 @@ class BOM_Order_Management {
 			return;
 		}
 
-		// Check Billmate settings to see if we have the ordermanagement enabled.
+		// Check Qvickly settings to see if we have the ordermanagement enabled.
 		$billmate_settings = get_option( 'woocommerce_bco_settings' );
 		$auto_cancel       = 'yes' === $billmate_settings['auto_cancel'] ? true : false;
 		if ( ! $auto_cancel ) {
@@ -62,18 +62,18 @@ class BOM_Order_Management {
 		if ( 'bco' === $order->get_payment_method() ) {
 			$bco_transaction_id = get_post_meta( $order_id, '_billmate_transaction_id', true );
 		} else {
-			// Old Billmate plugin.
+			// Old Qvickly plugin.
 			$bco_transaction_id = get_post_meta( $order_id, 'billmate_invoice_id', true );
 		}
 		if ( empty( $bco_transaction_id ) ) {
-			$order->add_order_note( __( 'Billmate Checkout reservation could not be cancelled. Missing Billmate transaction id.', 'billmate-order-managment-for-woocommerce' ) );
+			$order->add_order_note( __( 'Qvickly Checkout reservation could not be cancelled. Missing Qvickly transaction id.', 'billmate-order-managment-for-woocommerce' ) );
 			$order->set_status( 'on-hold' );
 			return;
 		}
 
 		// If this reservation was already cancelled, do nothing.
 		if ( get_post_meta( $order_id, '_billmate_reservation_cancelled', true ) ) {
-			$order->add_order_note( __( 'Could not cancel Billmate Checkout reservation, Billmate Checkout reservation is already cancelled.', 'billmate-order-managment-for-woocommerce' ) );
+			$order->add_order_note( __( 'Could not cancel Qvickly Checkout reservation, Qvickly Checkout reservation is already cancelled.', 'billmate-order-managment-for-woocommerce' ) );
 			return;
 		}
 
@@ -85,14 +85,14 @@ class BOM_Order_Management {
 			// If error save error message.
 			$code          = $billmate_order->get_error_code();
 			$message       = $billmate_order->get_error_message();
-			$text          = __( 'Billmate API Error on Billmate cancel order: ', 'billmate-checkout-for-woocommerce' ) . '%s %s';
+			$text          = __( 'Qvickly API Error on Qvickly cancel order: ', 'billmate-checkout-for-woocommerce' ) . '%s %s';
 			$formated_text = sprintf( $text, $code, $message );
 			$order->add_order_note( $formated_text );
 			$order->set_status( 'on-hold' );
 		} else {
 			// Add time stamp, used to prevent duplicate activations for the same order.
 			update_post_meta( $order_id, '_billmate_reservation_cancelled', current_time( 'mysql' ) );
-			$order->add_order_note( __( 'Billmate reservation was successfully cancelled.', 'billmate-checkout-for-woocommerce' ) );
+			$order->add_order_note( __( 'Qvickly reservation was successfully cancelled.', 'billmate-checkout-for-woocommerce' ) );
 		}
 	}
 
@@ -123,11 +123,11 @@ class BOM_Order_Management {
 
 		// Don't try to activate direct payment method orders.
 		// Only check this for the old billmate_checkout payment method.
-		if ( 'billmate_checkout' === $order->get_payment_method() && in_array( $order->get_payment_method_title(), array( 'Billmate Checkout (Direktbetalning)', 'Billmate Checkout (Swish)' ), true ) ) {
+		if ( 'billmate_checkout' === $order->get_payment_method() && in_array( $order->get_payment_method_title(), array( 'Qvickly Checkout (Direktbetalning)', 'Qvickly Checkout (Swish)' ), true ) ) {
 			return;
 		}
 
-		// Check Billmate settings to see if we have the ordermanagement enabled.
+		// Check Qvickly settings to see if we have the ordermanagement enabled.
 		$billmate_settings = get_option( 'woocommerce_bco_settings' );
 		$auto_capture      = 'yes' === $billmate_settings['auto_capture'] ? true : false;
 		if ( ! $auto_capture ) {
@@ -144,19 +144,19 @@ class BOM_Order_Management {
 		if ( 'bco' === $order->get_payment_method() ) {
 			$bco_transaction_id = get_post_meta( $order_id, '_billmate_transaction_id', true );
 		} else {
-			// Old Billmate plugin.
+			// Old Qvickly plugin.
 			$bco_transaction_id = get_post_meta( $order_id, 'billmate_invoice_id', true );
 		}
 
 		if ( empty( $bco_transaction_id ) ) {
-			$order->add_order_note( __( 'Billmate Checkout reservation could not be activated. Missing Billmate transaction id.', 'billmate-order-managment-for-woocommerce' ) );
+			$order->add_order_note( __( 'Qvickly Checkout reservation could not be activated. Missing Qvickly transaction id.', 'billmate-order-managment-for-woocommerce' ) );
 			$order->set_status( 'on-hold' );
 			return;
 		}
 
 		// If this reservation was already activated, do nothing.
 		if ( get_post_meta( $order_id, '_billmate_reservation_activated', true ) ) {
-			$order->add_order_note( __( 'Could not activate Billmate Checkout reservation, Billmate Checkout reservation is already activated.', 'billmate-order-management-for-woocommerce' ) );
+			$order->add_order_note( __( 'Could not activate Qvickly Checkout reservation, Qvickly Checkout reservation is already activated.', 'billmate-order-management-for-woocommerce' ) );
 			return;
 		}
 
@@ -168,14 +168,14 @@ class BOM_Order_Management {
 			// If error save error message.
 			$code          = $billmate_order->get_error_code();
 			$message       = $billmate_order->get_error_message();
-			$text          = __( 'Billmate API Error on Billmate activate order: ', 'billmate-order-management-for-woocommerce' ) . '%s %s';
+			$text          = __( 'Qvickly API Error on Qvickly activate order: ', 'billmate-order-management-for-woocommerce' ) . '%s %s';
 			$formated_text = sprintf( $text, $code, $message );
 			$order->add_order_note( $formated_text );
 			$order->set_status( 'on-hold' );
 		} else {
 			// Add time stamp, used to prevent duplicate activations for the same order.
 			update_post_meta( $order_id, '_billmate_reservation_activated', current_time( 'mysql' ) );
-			$order->add_order_note( __( 'Billmate reservation was successfully activated.', 'billmate-order-management-for-woocommerce' ) );
+			$order->add_order_note( __( 'Qvickly reservation was successfully activated.', 'billmate-order-management-for-woocommerce' ) );
 		}
 
 	}
@@ -199,20 +199,20 @@ class BOM_Order_Management {
 		// Check if we have a transaction id.
 		$bco_transaction_id = get_post_meta( $order_id, '_billmate_transaction_id', true );
 		if ( empty( $bco_transaction_id ) ) {
-			$order->add_order_note( __( 'Billmate Checkout order could not be refunded. Missing Billmate transaction id.', 'billmate-checkout-for-woocommerce' ) );
+			$order->add_order_note( __( 'Qvickly Checkout order could not be refunded. Missing Qvickly transaction id.', 'billmate-checkout-for-woocommerce' ) );
 			$order->set_status( 'on-hold' );
 			return false;
 		}
 
 		$subscription = $this->check_if_subscription( $order );
 
-		// Get the Billmate order.
+		// Get the Qvickly order.
 		$billmate_order_tmp = BOM_WC()->api->request_get_payment( $bco_transaction_id );
 		if ( is_wp_error( $billmate_order_tmp ) ) {
 			// If error save error message.
 			$code          = $billmate_order_tmp->get_error_code();
 			$message       = $billmate_order_tmp->get_error_message();
-			$text          = __( 'Billmate API Error on get billmate order before refund: ', 'billmate-checkout-for-woocommerce' ) . '%s %s';
+			$text          = __( 'Qvickly API Error on get billmate order before refund: ', 'billmate-checkout-for-woocommerce' ) . '%s %s';
 			$formated_text = sprintf( $text, $code, $message );
 			$order->add_order_note( $formated_text );
 			return false;
@@ -228,16 +228,16 @@ class BOM_Order_Management {
 				// If error save error message and return false.
 				$code          = $billmate_order->get_error_code();
 				$message       = $billmate_order->get_error_message();
-				$text          = __( 'Billmate API Error on Billmate refund: ', 'billmate-checkout-for-woocommerce' ) . '%s %s';
+				$text          = __( 'Qvickly API Error on Qvickly refund: ', 'billmate-checkout-for-woocommerce' ) . '%s %s';
 				$formated_text = sprintf( $text, $code, $message );
 				$order->add_order_note( $formated_text );
 				return false;
 			}
-			$order->add_order_note( __( 'Billmate Checkout order was successfully refunded.', 'billmate-checkout-for-woocommerce' ) );
+			$order->add_order_note( __( 'Qvickly Checkout order was successfully refunded.', 'billmate-checkout-for-woocommerce' ) );
 			return true;
 		} else {
-			// Translators: Billmate order status.
-			$note = sprintf( __( 'Billmate Checkout order could not be refunded because order has status <em>%s</em> in Billmate Online.', 'billmate-checkout-for-woocommerce' ), sanitize_key( $bco_status ) );
+			// Translators: Qvickly order status.
+			$note = sprintf( __( 'Qvickly Checkout order could not be refunded because order has status <em>%s</em> in Qvickly Online.', 'billmate-checkout-for-woocommerce' ), sanitize_key( $bco_status ) );
 			$order->add_order_note( $note );
 			return false;
 		}
@@ -261,7 +261,7 @@ class BOM_Order_Management {
 	}
 
 	/**
-	 * Updates Billmate order items.
+	 * Updates Qvickly order items.
 	 *
 	 * @param int $order_id Order ID.
 	 */
@@ -287,7 +287,7 @@ class BOM_Order_Management {
 			return;
 		}
 
-		// Check Billmate settings to see if we have the ordermanagement enabled.
+		// Check Qvickly settings to see if we have the ordermanagement enabled.
 		$billmate_settings = get_option( 'woocommerce_bco_settings' );
 		$auto_update       = 'yes' === $billmate_settings['auto_update'] ? true : false;
 
@@ -297,11 +297,11 @@ class BOM_Order_Management {
 
 		// Retrieve transaction id from order post meta.
 		$bco_transaction_id = get_post_meta( $order_id, '_billmate_transaction_id', true );
-		// Retrieve Billmate order.
+		// Retrieve Qvickly order.
 		$billmate_order = BCO_WC()->api->request_get_payment( $bco_transaction_id );
 
 		if ( is_wp_error( $billmate_order ) ) {
-			$order->add_order_note( 'Billmate order could not be updated due to an error.' );
+			$order->add_order_note( 'Qvickly order could not be updated due to an error.' );
 
 			return;
 		}
@@ -309,21 +309,21 @@ class BOM_Order_Management {
 		if ( ! in_array( $billmate_order['data']['PaymentData']['status'], $not_allowed_statuses, true ) ) {
 			$response = BOM_WC()->api->request_update_payment( $order_id );
 			if ( ! is_wp_error( $response ) ) {
-				$order->add_order_note( 'Billmate order updated.' );
+				$order->add_order_note( 'Qvickly order updated.' );
 			} else {
-				$order_note = 'Could not update Billmate order lines.';
+				$order_note = 'Could not update Qvickly order lines.';
 				if ( '' !== $response->get_error_message() ) {
 					$order_note .= ' ' . $response->get_error_message() . '.';
 				}
 				$order->add_order_note( $order_note );
 			}
 		} else {
-			$order->add_order_note( __( 'Order can not be updated in Billmate Online because the current Billmate order status does not allow this.', 'billmate-checkout-for-woocommerce' ) );
+			$order->add_order_note( __( 'Order can not be updated in Qvickly Online because the current Qvickly order status does not allow this.', 'billmate-checkout-for-woocommerce' ) );
 		}
 	}
 
 	/**
-	 * Updates Billmate order address.
+	 * Updates Qvickly order address.
 	 *
 	 * @param int $order_id Order ID.
 	 */
@@ -350,7 +350,7 @@ class BOM_Order_Management {
 			return;
 		}
 
-		// Check Billmate settings to see if we have the ordermanagement enabled.
+		// Check Qvickly settings to see if we have the ordermanagement enabled.
 		$billmate_settings = get_option( 'woocommerce_bco_settings' );
 		$auto_update       = 'yes' === $billmate_settings['auto_update'] ? true : false;
 
@@ -360,27 +360,27 @@ class BOM_Order_Management {
 
 		// Retrieve transaction id from order post meta.
 		$bco_transaction_id = get_post_meta( $order_id, '_billmate_transaction_id', true );
-		// Retrieve Billmate order.
+		// Retrieve Qvickly order.
 		$billmate_order = BCO_WC()->api->request_get_payment( $bco_transaction_id );
 
 		if ( is_wp_error( $billmate_order ) ) {
-			$order->add_order_note( 'Billmate order could not be updated due to an error.' );
+			$order->add_order_note( 'Qvickly order could not be updated due to an error.' );
 			return;
 		}
 		$not_allowed_statuses = array( 'Paid', 'Pending', 'Factoring', 'PartPayment', 'Handling' );
 		if ( ! in_array( $billmate_order['data']['PaymentData']['status'], $not_allowed_statuses, true ) ) {
 			$response = BOM_WC()->api->request_update_payment( $order_id );
 			if ( ! is_wp_error( $response ) ) {
-				$order->add_order_note( 'Customer address updated in Billmate order.' );
+				$order->add_order_note( 'Customer address updated in Qvickly order.' );
 			} else {
-				$order_note = 'Could not update address in Billmate order.';
+				$order_note = 'Could not update address in Qvickly order.';
 				if ( '' !== $response->get_error_message() ) {
 					$order_note .= ' ' . $response->get_error_message() . '.';
 				}
 				$order->add_order_note( $order_note );
 			}
 		} else {
-			$order->add_order_note( __( 'Order can not be updated in Billmate Online because the current Billmate order status does not allow this.', 'billmate-checkout-for-woocommerce' ) );
+			$order->add_order_note( __( 'Order can not be updated in Qvickly Online because the current Qvickly order status does not allow this.', 'billmate-checkout-for-woocommerce' ) );
 		}
 	}
 }

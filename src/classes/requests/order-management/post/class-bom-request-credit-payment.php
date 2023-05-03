@@ -17,7 +17,7 @@ class BOM_Request_Credit_Payment extends BOM_Request {
 	/**
 	 * Makes the request.
 	 *
-	 * @param string $bco_transaction_id Billmate transaction id.
+	 * @param string $bco_transaction_id Qvickly transaction id.
 	 * @param array  $refund_data Refund data.
 	 * @return array
 	 */
@@ -39,7 +39,7 @@ class BOM_Request_Credit_Payment extends BOM_Request {
 	/**
 	 * Gets the request body.
 	 *
-	 * @param string $bco_transaction_id Billmate transaction id.
+	 * @param string $bco_transaction_id Qvickly transaction id.
 	 * @param array  $refund_data Refund data.
 	 * @return array
 	 */
@@ -62,7 +62,7 @@ class BOM_Request_Credit_Payment extends BOM_Request {
 	/**
 	 * Gets the request args for the API call.
 	 *
-	 * @param string $bco_transaction_id Billmate transaction id.
+	 * @param string $bco_transaction_id Qvickly transaction id.
 	 * @param array  $refund_data Refund data.
 	 * @return array
 	 */
@@ -78,7 +78,7 @@ class BOM_Request_Credit_Payment extends BOM_Request {
 	/**
 	 * Get needed data for the request.
 	 *
-	 * @param string $bco_transaction_id Billmate transaction id.
+	 * @param string $bco_transaction_id Qvickly transaction id.
 	 * @param array  $refund_data Refund data.
 	 * @return array
 	 */

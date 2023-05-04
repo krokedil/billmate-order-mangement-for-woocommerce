@@ -42,6 +42,9 @@ The easiest way to report a bug is to email us at [support@billmate.se](mailto:s
 
 == Changelog ==
 
+= 2023.05.04    - version 1.3.1 =
+* Tweak         - Adds Qvickly icon.svg to WordPress.org assets.
+
 = 2023.05.03    - version 1.3.0 =
 * Tweak         - Change name from Billmate to Qvickly.
 

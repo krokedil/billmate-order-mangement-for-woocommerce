@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define plugin constants.
-define( 'BILLMATE_ORDER_MANAGEMENT_VERSION', '1.3.0' );
+define( 'BILLMATE_ORDER_MANAGEMENT_VERSION', '1.3.1' );
 define( 'BILLMATE_ORDER_MANAGEMENT_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
 define( 'BILLMATE_ORDER_MANAGEMENT_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'BILLMATE_ORDER_MANAGEMENT_ENV', 'https://api.billmate.se' );

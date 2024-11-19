@@ -13,6 +13,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Order management class.
  */
 class BOM_Order_Management {
+
+	private $supports = array(
+		'activate' => array( 'bco', 'billmate_checkout', 'billmate_invoice', 'billmate_partpayment', 'qvickly_payments' ),
+		'cancel'   => array( 'bco', 'billmate_checkout', 'billmate_partpayment', 'billmate_cardpay', 'billmate_invoice', 'qvickly_payments' ),
+		'refund'   => array( 'bco', 'qvickly_payments' ),
+	);
+
 	/**
 	 * Class constructor.
 	 */
@@ -40,7 +47,7 @@ class BOM_Order_Management {
 	public function cancel_reservation( $order_id ) {
 		$order = wc_get_order( $order_id );
 		// If this order wasn't created using bco or billmate_checkout payment method, bail.
-		if ( ! in_array( $order->get_payment_method(), array( 'bco', 'billmate_checkout', 'billmate_partpayment', 'billmate_cardpay', 'billmate_invoice' ), true ) ) {
+		if ( ! in_array( $order->get_payment_method(), $this->supports['cancel'], true ) ) {
 			return;
 		}
 
@@ -105,7 +112,7 @@ class BOM_Order_Management {
 	public function activate_reservation( $order_id ) {
 		$order = wc_get_order( $order_id );
 		// If this order wasn't created using bco or billmate_checkout payment method, bail.
-		if ( ! in_array( $order->get_payment_method(), array( 'bco', 'billmate_checkout', 'billmate_invoice', 'billmate_partpayment' ), true ) ) {
+		if ( ! in_array( $order->get_payment_method(), $this->supports['activate'], true ) ) {
 			return;
 		}
 
@@ -177,7 +184,6 @@ class BOM_Order_Management {
 			update_post_meta( $order_id, '_billmate_reservation_activated', current_time( 'mysql' ) );
 			$order->add_order_note( __( 'Qvickly reservation was successfully activated.', 'billmate-order-management-for-woocommerce' ) );
 		}
-
 	}
 
 	/**
@@ -192,7 +198,7 @@ class BOM_Order_Management {
 	public function refund_billmate_order( $result, $order_id, $amount = null, $reason = '' ) {
 		$order = wc_get_order( $order_id );
 		// If this order wasn't created using aco payment method, bail.
-		if ( 'bco' !== $order->get_payment_method() ) {
+		if ( ! in_array( $order->get_payment_method(), $this->supports['refund'], true ) ) {
 			return false;
 		}
 
@@ -241,7 +247,6 @@ class BOM_Order_Management {
 			$order->add_order_note( $note );
 			return false;
 		}
-
 	}
 
 	/**
